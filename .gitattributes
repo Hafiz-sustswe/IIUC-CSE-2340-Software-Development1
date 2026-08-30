@@ -1,0 +1,25 @@
+# Normalise line endings so Windows and Mac students see the same files
+* text=auto eol=lf
+
+# Windows batch files must keep CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Treat these as binary: never diff, never auto-convert
+*.pptx  binary
+*.potx  binary
+*.docx  binary
+*.xlsx  binary
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.svg   text
+*.ico   binary
+*.zip   binary
+*.mp4   binary
+
+# Mark generated or vendored files so GitHub's language stats stay accurate
+templates/** linguist-documentation

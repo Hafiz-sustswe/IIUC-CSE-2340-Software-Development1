@@ -1,0 +1,63 @@
+# ---------------------------------------------------------
+# CSE-2340 course materials repository
+# ---------------------------------------------------------
+
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build output
+dist/
+build/
+.next/
+out/
+.vite/
+
+# Secrets and keys - NEVER commit these
+.env
+.env.local
+.env.*.local
+firebase-config.js
+serviceAccountKey.json
+
+# Firebase local files
+.firebase/
+firebase-debug.log
+.firebaserc.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+._*
+
+# Editor and IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Office temporary and lock files (created when a .pptx is open)
+~$*.pptx
+~$*.docx
+~$*.xlsx
+*.tmp
+
+# Instructor-only material - NEVER pushed to the public repository
+# (teaching notes contain answer keys, e.g. the list of planted bugs)
+_instructor/
+
+# Local instructor drafts - keep unpublished work out of the repo
+_drafts/
+_private/
+*-DRAFT.*
+*-WIP.*
+
+# Student submissions must live in their own repositories
+submissions/

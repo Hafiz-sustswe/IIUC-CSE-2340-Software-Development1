@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 2, Class 2 | THE FIXED PAGE
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  This is week2-class2-inaccessible.html after all twelve problems
+  are fixed. Every fix is marked with FIX n so you can compare the
+  two files side by side in VS Code.
+
+  Tip: in VS Code, select both files in the explorer, right click,
+  and choose "Compare Selected".
+-->
+<!-- FIX 1: lang tells a screen reader which language to pronounce -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- FIX 2: viewport lets the page zoom and reflow on small screens -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- FIX 3: a title that describes this page, not just "Portal" -->
+  <title>Student Registration | IIUC Student Portal</title>
+
+  <style>
+    /* The skip link is hidden until it receives keyboard focus. */
+    .skip-link {
+      position: absolute;
+      left: -999px;
+    }
+    .skip-link:focus {
+      left: 8px;
+      top: 8px;
+      background: #ffffff;
+      padding: 8px;
+    }
+    /* FIX 12: focus stays visible everywhere. Never outline: none. */
+    :focus {
+      outline: 3px solid #003366;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- FIX 4: a skip link so keyboard users can jump past the menu -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- FIX 5: real landmarks instead of div id="header" and div id="foot" -->
+  <header>
+    <!-- FIX 6: a real h1 instead of a styled div -->
+    <h1>IIUC Student Portal</h1>
+
+    <!-- FIX 7: real links inside a nav and a list.
+         The old span tags could not be reached with Tab at all. -->
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="register.html" aria-current="page">Register</a></li>
+        <li><a href="#routine">Routine</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- FIX 8: heading order now runs h1 -> h2 -> h3 with no skips -->
+    <h2>Student Registration</h2>
+
+    <!-- FIX 9a: informative image gets alt text that describes it -->
+    <img src="images/campus.jpg"
+         alt="Students walking in front of the IIUC main building"
+         width="300">
+
+    <!-- FIX 9b: decorative image gets an EMPTY alt so the screen
+         reader stays silent. Removing the attribute would make it
+         read the file name aloud. -->
+    <img src="images/decorative-line.png" alt="">
+
+    <!-- FIX 10: the instruction no longer depends on colour, and the
+         text colour now passes the 4.5 to 1 contrast ratio -->
+    <p>Fields marked <strong>(required)</strong> must be completed.</p>
+
+    <form action="#" method="post">
+
+      <!-- FIX 11: every input has a real label connected by for and id -->
+      <p>
+        <label for="fullname">Full Name (required)</label><br>
+        <input type="text" id="fullname" name="fullname" required>
+      </p>
+
+      <p>
+        <label for="sid">Student ID (required)</label><br>
+        <input type="text" id="sid" name="sid" required>
+      </p>
+
+      <p>
+        <label for="email">Email (required)</label><br>
+        <input type="email" id="email" name="email" required>
+      </p>
+
+      <!-- FIX 12: the radio group is named by a fieldset and legend,
+           and both buttons now share the SAME name so they behave
+           as one group -->
+      <fieldset>
+        <legend>Preferred shift</legend>
+
+        <input type="radio" id="morning" name="shift" value="morning">
+        <label for="morning">Morning</label>
+
+        <input type="radio" id="evening" name="shift" value="evening">
+        <label for="evening">Evening</label>
+      </fieldset>
+
+      <!-- FIX 13: a real button. It is focusable, it responds to Enter
+           and Space, and a screen reader announces it as a button. -->
+      <p>
+        <button type="submit">Register</button>
+      </p>
+
+    </form>
+
+    <section id="routine">
+      <h3>Class Routine</h3>
+
+      <!-- FIX 14: a real table header row using th and scope,
+           plus a caption that names the table -->
+      <table>
+        <caption>CSE-2340 weekly class routine</caption>
+
+        <thead>
+          <tr>
+            <th scope="col">Class</th>
+            <th scope="col">Day</th>
+            <th scope="col">Topic</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="row">C1</th>
+            <td>Saturday</td>
+            <td>Navigation, forms and tables</td>
+          </tr>
+          <tr>
+            <th scope="row">C2</th>
+            <td>Saturday</td>
+            <td>Accessibility essentials</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FIX 15: the link text now describes where the link goes -->
+    <p><a href="details.html">Read the full course details</a></p>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Department of Computer Science and Engineering, IIUC.</p>
+  </footer>
+
+</body>
+
+</html>

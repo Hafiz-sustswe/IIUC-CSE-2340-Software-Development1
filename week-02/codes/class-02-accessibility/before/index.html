@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 2, Class 2 | THE BROKEN PAGE
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  ============================================================
+  THIS PAGE IS BROKEN ON PURPOSE.
+  It contains twelve accessibility problems.
+  Your task is to find them and fix them.
+  DO NOT copy this page into your own project.
+  ============================================================
+
+  Student instructions:
+  1. Open this file with Live Server.
+  2. Put your mouse down. Press Tab from the top. What can you reach?
+  3. Run a Lighthouse accessibility audit (F12 -> Lighthouse).
+  4. Write down every problem you find.
+  5. Fix at least four of them, then run Lighthouse again.
+
+  The answers are in week2-class2-accessible.html. Do not open it first.
+-->
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Portal</title>
+</head>
+
+<body>
+
+  <div id="header">
+    <div class="title" style="font-size:28px; font-weight:bold">IIUC Student Portal</div>
+
+    <div class="menu">
+      <span onclick="alert('Home')">Home</span> |
+      <span onclick="alert('Register')">Register</span> |
+      <span onclick="alert('Routine')">Routine</span>
+    </div>
+  </div>
+
+  <div id="content">
+
+    <h3>Student Registration</h3>
+
+    <img src="images/campus.jpg" width="300">
+
+    <img src="images/decorative-line.png" alt="decorative-line.png">
+
+    <p style="color:#c9cfd6">
+      Please complete all the fields shown in red below.
+    </p>
+
+    <div class="form">
+
+      <input type="text" name="fullname" placeholder="Name">
+      <br><br>
+
+      <input type="text" name="sid" placeholder="Student ID">
+      <br><br>
+
+      <input type="text" name="email" placeholder="Email">
+      <br><br>
+
+      <span>Preferred shift</span><br>
+      <input type="radio" id="m" name="shift-morning" value="morning">
+      <span>Morning</span>
+      <input type="radio" id="e" name="shift-evening" value="evening">
+      <span>Evening</span>
+      <br><br>
+
+      <div class="btn" onclick="alert('submitted')"
+           style="background:#e39a18; color:#f5d99a; width:100px; padding:8px">
+        Register
+      </div>
+
+    </div>
+
+    <h5>Class Routine</h5>
+
+    <table>
+      <tr>
+        <td style="font-weight:bold">Class</td>
+        <td style="font-weight:bold">Day</td>
+        <td style="font-weight:bold">Topic</td>
+      </tr>
+      <tr>
+        <td>C1</td>
+        <td>Saturday</td>
+        <td>Navigation, forms and tables</td>
+      </tr>
+      <tr>
+        <td>C2</td>
+        <td>Saturday</td>
+        <td>Accessibility essentials</td>
+      </tr>
+    </table>
+
+    <p>For more information <a href="details.html">click here</a>.</p>
+
+  </div>
+
+  <div id="foot">Copyright 2026</div>
+
+</body>
+
+</html>

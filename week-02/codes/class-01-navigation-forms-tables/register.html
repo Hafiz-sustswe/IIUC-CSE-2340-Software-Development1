@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 Software Development 1 | Week 2, Class 1
+  Navigation, forms and tables - complete example
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  HOW TO RUN
+  1. Save this file as  register.html  inside a folder named  week2-practice
+  2. Right click it in VS Code and choose "Open with Live Server"
+
+  NOTE: there is still no CSS. The page will look plain. That is correct.
+        CSS starts in Week 2, Class 3.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Student registration page built with semantic HTML.">
+  <title>Student Registration | IIUC Portal</title>
+</head>
+
+<body>
+
+  <!-- Skip link: the first focusable item on the page.
+       A keyboard user presses Tab once and jumps past the whole menu. -->
+  <a href="#main-content">Skip to main content</a>
+
+  <!-- ============================================================
+       PATTERN 1: NAVIGATION
+       aria-label names this nav, which matters when a page has more than one.
+       aria-current="page" marks the page the user is currently on.
+       ============================================================ -->
+  <header>
+    <h1>IIUC Student Portal</h1>
+
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="register.html" aria-current="page">Register</a></li>
+        <li><a href="#routine">Routine</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="https://www.iiuc.ac.bd">IIUC Website</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <hr>
+
+  <main id="main-content">
+
+    <h2>Student Registration</h2>
+    <p>Fill in the form below to register for the course. Fields marked
+      <strong>(required)</strong> must be completed.</p>
+
+    <!-- ============================================================
+         PATTERN 2: FORM
+         action="#" means the data goes nowhere. Sending data needs a
+         server, which is outside the scope of this course.
+         ============================================================ -->
+    <form action="#" method="post">
+
+      <!-- ---------- Group 1: personal information ---------- -->
+      <fieldset>
+        <legend>Personal Information</legend>
+
+        <p>
+          <label for="fullname">Full Name (required)</label><br>
+          <input type="text" id="fullname" name="fullname"
+                 required placeholder="Your full name">
+        </p>
+
+        <p>
+          <label for="sid">Student ID (required)</label><br>
+          <input type="text" id="sid" name="sid"
+                 required minlength="7" maxlength="10" placeholder="C251001">
+        </p>
+
+        <p>
+          <label for="email">Email (required)</label><br>
+          <input type="email" id="email" name="email"
+                 required placeholder="you@example.com">
+        </p>
+
+        <p>
+          <label for="phone">Phone Number</label><br>
+          <input type="tel" id="phone" name="phone" placeholder="01XXXXXXXXX">
+        </p>
+
+        <p>
+          <label for="dob">Date of Birth</label><br>
+          <input type="date" id="dob" name="dob">
+        </p>
+      </fieldset>
+
+      <!-- ---------- Group 2: choices ---------- -->
+      <fieldset>
+        <legend>Course Preferences</legend>
+
+        <!-- RADIO: choose ONE.
+             All three inputs share name="shift", which is what makes
+             them a single group. Different names would break it. -->
+        <p>Preferred shift:</p>
+        <p>
+          <input type="radio" id="morning" name="shift" value="morning" checked>
+          <label for="morning">Morning</label>
+
+          <input type="radio" id="afternoon" name="shift" value="afternoon">
+          <label for="afternoon">Afternoon</label>
+
+          <input type="radio" id="evening" name="shift" value="evening">
+          <label for="evening">Evening</label>
+        </p>
+
+        <!-- CHECKBOX: choose MANY. Each one has its own name. -->
+        <p>Which topics interest you most?</p>
+        <p>
+          <input type="checkbox" id="html" name="html" value="yes">
+          <label for="html">HTML</label>
+
+          <input type="checkbox" id="css" name="css" value="yes">
+          <label for="css">CSS</label>
+
+          <input type="checkbox" id="js" name="js" value="yes">
+          <label for="js">JavaScript</label>
+
+          <input type="checkbox" id="react" name="react" value="yes">
+          <label for="react">React</label>
+        </p>
+
+        <!-- SELECT: a dropdown. Good when there are many options. -->
+        <p>
+          <label for="dept">Department</label><br>
+          <select id="dept" name="dept" required>
+            <option value="">-- Choose your department --</option>
+            <option value="cse">Computer Science and Engineering</option>
+            <option value="eee">Electrical and Electronic Engineering</option>
+            <option value="civil">Civil Engineering</option>
+            <option value="bba">Business Administration</option>
+          </select>
+        </p>
+
+        <p>
+          <label for="comments">Anything else we should know?</label><br>
+          <textarea id="comments" name="comments" rows="4" cols="40"></textarea>
+        </p>
+      </fieldset>
+
+      <p>
+        <button type="submit">Register</button>
+        <button type="reset">Clear the form</button>
+      </p>
+
+    </form>
+
+    <hr>
+
+    <!-- ============================================================
+         PATTERN 3: TABLE
+         caption  = the title of the table, and it comes first
+         thead    = the header row(s)
+         tbody    = the data rows
+         th       = a header cell, td = a data cell
+         scope    = says whether a th describes a column or a row
+         ============================================================ -->
+    <section id="routine">
+      <h2>Class Routine</h2>
+
+      <table>
+        <caption>CSE-2340 weekly class routine, Autumn 2026</caption>
+
+        <thead>
+          <tr>
+            <th scope="col">Class</th>
+            <th scope="col">Day</th>
+            <th scope="col">Time</th>
+            <th scope="col">Topic</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="row">C1</th>
+            <td>Saturday</td>
+            <td>08:00 - 08:50</td>
+            <td>Navigation, forms and tables</td>
+          </tr>
+          <tr>
+            <th scope="row">C2</th>
+            <td>Saturday</td>
+            <td>09:00 - 09:50</td>
+            <td>Accessibility essentials</td>
+          </tr>
+          <tr>
+            <th scope="row">C3</th>
+            <td>Monday</td>
+            <td>08:00 - 08:50</td>
+            <td>CSS methods, selectors and units</td>
+          </tr>
+          <tr>
+            <th scope="row">C4</th>
+            <td>Monday</td>
+            <td>09:00 - 09:50</td>
+            <td>Box model and backgrounds</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <footer>
+    <p>&copy; 2026 Department of Computer Science and Engineering, IIUC.</p>
+    <p>Built for CSE-2340 Software Development 1.</p>
+  </footer>
+
+</body>
+
+</html>

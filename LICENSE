@@ -1,0 +1,39 @@
+Copyright (c) 2026 Md Sadman Hafiz
+Lecturer, Department of Computer Science and Engineering
+International Islamic University Chittagong (IIUC)
+
+TEACHING MATERIALS
+------------------
+The teaching materials in this repository — slide decks, handouts, checklists,
+notes and written explanations — are licensed under the
+
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+    (CC BY-NC-SA 4.0)
+
+You are free to:
+  Share  — copy and redistribute the material in any medium or format
+  Adapt  — remix, transform and build upon the material
+
+Under the following terms:
+  Attribution   — You must give appropriate credit to Md Sadman Hafiz, IIUC,
+                  provide a link to the licence, and indicate if changes were
+                  made.
+  NonCommercial — You may not use the material for commercial purposes.
+  ShareAlike    — If you remix or build upon the material, you must distribute
+                  your contribution under the same licence.
+
+Full licence text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+Human-readable summary: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+CODE EXAMPLES
+-------------
+The source code examples in the `codes/` folders are provided for teaching and
+may be reused freely, including in your own coursework and personal projects,
+with no attribution required. They are provided "as is", without warranty of
+any kind.
+
+COURSE DOCUMENTS
+----------------
+Documents in `course-info/` are official IIUC course documents and are included
+here for the convenience of enrolled students. They are not covered by the
+licence above and remain the property of the university.

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 2, Class 1 | Demonstration snippets
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  Open with Live Server and scroll while explaining each slide.
+  Blocks marked BROKEN ON PURPOSE are teaching demonstrations.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSE-2340 | Navigation, Forms and Tables Demo</title>
+</head>
+
+<body>
+
+  <h1>Navigation, Forms and Tables &mdash; Demonstration</h1>
+  <hr>
+
+  <!-- ===== 1. NAVIGATION PATTERNS ===== -->
+  <h2>1. Navigation</h2>
+
+  <h3>Correct: a nav containing a list of links</h3>
+  <nav aria-label="Demo navigation">
+    <ul>
+      <li><a href="#forms">Forms</a></li>
+      <li><a href="#tables">Tables</a></li>
+      <li><a href="https://www.iiuc.ac.bd">IIUC (external)</a></li>
+    </ul>
+  </nav>
+
+  <h3>BROKEN ON PURPOSE: the same menu built with span tags</h3>
+  <p>Try pressing Tab. You cannot reach these. A screen reader does not
+    announce them as links.</p>
+  <div>
+    <span>Forms</span>
+    <span>Tables</span>
+    <span>IIUC</span>
+  </div>
+  <hr>
+
+  <!-- ===== 2. INPUT TYPES ===== -->
+  <h2 id="forms">2. Input types</h2>
+  <form action="#" method="post">
+    <p>
+      <label for="d-text">text</label><br>
+      <input type="text" id="d-text" name="d-text">
+    </p>
+    <p>
+      <label for="d-email">email &mdash; type "abc" and press Register to see the browser complain</label><br>
+      <input type="email" id="d-email" name="d-email" required>
+    </p>
+    <p>
+      <label for="d-pass">password</label><br>
+      <input type="password" id="d-pass" name="d-pass">
+    </p>
+    <p>
+      <label for="d-num">number, min 16 and max 60</label><br>
+      <input type="number" id="d-num" name="d-num" min="16" max="60">
+    </p>
+    <p>
+      <label for="d-tel">tel &mdash; changes the keyboard on a phone</label><br>
+      <input type="tel" id="d-tel" name="d-tel">
+    </p>
+    <p>
+      <label for="d-date">date &mdash; opens a date picker</label><br>
+      <input type="date" id="d-date" name="d-date">
+    </p>
+    <p>
+      <label for="d-url">url</label><br>
+      <input type="url" id="d-url" name="d-url" placeholder="https://example.com">
+    </p>
+    <p>
+      <label for="d-file">file</label><br>
+      <input type="file" id="d-file" name="d-file">
+    </p>
+    <p><button type="submit">Register</button></p>
+  </form>
+  <hr>
+
+  <!-- ===== 3. RADIO GROUPS ===== -->
+  <h2>3. Radio buttons: the same-name rule</h2>
+
+  <h3>Correct: both share name="shift"</h3>
+  <p>
+    <input type="radio" id="ok-day" name="shift" value="day">
+    <label for="ok-day">Day</label>
+    <input type="radio" id="ok-eve" name="shift" value="evening">
+    <label for="ok-eve">Evening</label>
+  </p>
+
+  <h3>BROKEN ON PURPOSE: different names, so both can be selected</h3>
+  <p>
+    <input type="radio" id="bad-day" name="shift-a" value="day">
+    <label for="bad-day">Day</label>
+    <input type="radio" id="bad-eve" name="shift-b" value="evening">
+    <label for="bad-eve">Evening</label>
+  </p>
+  <hr>
+
+  <!-- ===== 4. CHECKBOX AND SELECT ===== -->
+  <h2>4. Checkbox and select</h2>
+  <p>
+    <input type="checkbox" id="d-html" name="d-html">
+    <label for="d-html">HTML</label>
+    <input type="checkbox" id="d-css" name="d-css">
+    <label for="d-css">CSS</label>
+  </p>
+  <p>
+    <label for="d-dept">Department</label><br>
+    <select id="d-dept" name="d-dept">
+      <option value="">-- Choose --</option>
+      <option value="cse">CSE</option>
+      <option value="eee">EEE</option>
+    </select>
+  </p>
+  <hr>
+
+  <!-- ===== 5. LABEL CONNECTION TEST ===== -->
+  <h2>5. The label click test</h2>
+
+  <h3>Correct: for and id match, so clicking the text focuses the box</h3>
+  <p>
+    <label for="good-input">Click this text</label><br>
+    <input type="text" id="good-input" name="good-input">
+  </p>
+
+  <h3>BROKEN ON PURPOSE: for and id do not match, so nothing happens</h3>
+  <p>
+    <label for="wrong-name">Click this text</label><br>
+    <input type="text" id="different-id" name="bad-input">
+  </p>
+  <hr>
+
+  <!-- ===== 6. VALIDATION ATTRIBUTES ===== -->
+  <h2>6. Validation without JavaScript</h2>
+  <form action="#" method="post">
+    <p>
+      <label for="d-sid">Student ID: required, 8 to 10 characters, capitals and digits only</label><br>
+      <input type="text" id="d-sid" name="d-sid"
+             required minlength="8" maxlength="10" pattern="[A-Z0-9]+"
+             placeholder="C2510012">
+    </p>
+    <p><button type="submit">Try to submit</button></p>
+  </form>
+  <p>Open DevTools, delete the required attribute, and submit again.
+    That is why validation must also happen on the server.</p>
+  <hr>
+
+  <!-- ===== 7. TABLES ===== -->
+  <h2 id="tables">7. Tables</h2>
+
+  <h3>Correct: caption, thead, tbody and scope</h3>
+  <table border="1">
+    <caption>Marks of three students</caption>
+    <thead>
+      <tr>
+        <th scope="col">Student</th>
+        <th scope="col">Quiz</th>
+        <th scope="col">Project</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Rafi</th>
+        <td>8</td>
+        <td>18</td>
+        <td>26</td>
+      </tr>
+      <tr>
+        <th scope="row">Tahmina</th>
+        <td>9</td>
+        <td>19</td>
+        <td>28</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>colspan and rowspan</h3>
+  <table border="1">
+    <caption>A cell that spans two columns</caption>
+    <thead>
+      <tr>
+        <th scope="col">Day</th>
+        <th scope="col" colspan="2">Classes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Saturday</th>
+        <td>C1</td>
+        <td>C2</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The <code>border="1"</code> attribute above is only so the table is
+    visible today. From Week 2 Class 3 we use CSS for this instead.</p>
+
+</body>
+
+</html>
