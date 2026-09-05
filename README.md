@@ -1,5 +1,8 @@
 # CSE-2340 — Software Development 1
 
+
+
+
 Course materials, live-build code and study resources for **CSE-2340 Software Development 1**, Department of Computer Science and Engineering, International Islamic University Chittagong (IIUC).
 
 **Instructor:** Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
@@ -31,7 +34,8 @@ By the end of the course you should be able to design and build a responsive fro
 Open the file on GitHub and click the download button, or clone the whole repository once and pull updates each week:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/SD1-CSE-2340.git
+git clone https://github.com/hafiz-sustswe/
+IIUC-CSE-2340-Software-Development1/SD1-CSE-2340.git
 cd SD1-CSE-2340
 
 # each week, get the newest materials:
