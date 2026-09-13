@@ -1,4 +1,4 @@
-# Week 2 — Practical HTML Patterns, Accessibility and CSS Foundations
+# Week 2 — HTML Patterns, Accessibility and CSS Foundations
 
 **CSE-2340 Software Development 1** · Autumn 2026
 Instructor: Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
@@ -7,20 +7,22 @@ Instructor: Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
 
 ## This week in one line
 
-Turn single HTML tags into the three patterns every real website uses, make them usable by everybody, and then start styling them.
+Turn single HTML tags into the three patterns every real website uses, make them usable by everybody, and then style them properly.
 
 ---
 
 ## Classes
 
-| Class | Topic | Type | Status |
-|---|---|---|---|
-| C1 | Navigation, forms and tables: practical HTML patterns | Concept + live build | Published |
-| C2 | Accessibility essentials: landmarks, alt text, labels, heading order, keyboard navigation, focus and contrast | Practice + audit | Published |
-| C3 | CSS application methods, selectors, text properties and units | Concept + live build | Coming |
-| C4 | Box model, margin, padding, width/height, display and backgrounds | Practice | Coming |
+Under syllabus V3.8, **C1 and C3 are teaching classes** and **C2 and C4 are practice classes**.
 
-**CLO alignment:** C1 → CLO1 (PO1), CLO3 (PO5) · C2 → CLO2 (PO3), CLO3 (PO5)
+| Class | Type | Topic |
+|---|---|---|
+| C1 | Class | Navigation, forms and tables: practical HTML patterns; accessibility essentials: landmarks, alt text, labels, heading order, keyboard navigation, focus and contrast |
+| C2 | Practice | Build navigation, forms and tables; run an accessibility correction pass on the page |
+| C3 | Class | CSS application methods, selectors, text properties and units; box model, margin, padding, width/height, display and backgrounds |
+| C4 | Practice | Build and debug layouts using the box model, display and backgrounds |
+
+**CLO alignment:** C1 → CLO1 (PO1), CLO2 (PO3), CLO3 (PO5) · C3 → CLO1 (PO1), CLO3 (PO5)
 
 ---
 
@@ -30,16 +32,27 @@ Turn single HTML tags into the three patterns every real website uses, make them
 week-02/
 ├── codes/
 │   ├── class-01-navigation-forms-tables/
-│   │   ├── register.html        complete student registration page
+│   │   ├── register.html        complete registration page (no CSS yet)
 │   │   └── snippets.html        one demo per pattern, with deliberate bugs
-│   └── class-02-accessibility/
-│       ├── before/index.html    BROKEN ON PURPOSE — twelve problems to find
-│       └── after/index.html     the same page fixed, every change marked FIX n
+│   ├── class-02-accessibility/
+│   │   ├── before/index.html    BROKEN ON PURPOSE — twelve problems to find
+│   │   └── after/index.html     the same page fixed, every change marked FIX n
+│   ├── class-03-css-fundamentals/
+│   │   ├── index.html           the C1 page plus ONE link line
+│   │   ├── styles.css           the stylesheet built live, fully commented
+│   │   └── snippets.html/.css   one demo per slide
+│   └── class-04-layout-practice/
+│       ├── exercises.md         four exercises and the debugging method
+│       ├── starter/             BROKEN ON PURPOSE — eight bugs in styles.css
+│       └── solution/            all eight fixed, each marked FIX n
 └── study-materials/
-    ├── slides/                  C1 and C2 decks (.pptx and .pdf)
+    ├── slides/                  C1–C4 decks (.pptx and .pdf)
     └── handouts/
-        ├── accessibility-checklist.md    the ten-point marking standard
-        └── audit-report-template.md      structure for the C2 home task
+        ├── accessibility-checklist.md   the ten-point marking standard
+        ├── audit-report-template.md     for the C2 home task
+        ├── css-cheatsheet.md            everything from C3 in one page
+        ├── box-model-debug-guide.md     the four-step debugging routine
+        └── fixes-template.md            for the C4 home task
 ```
 
 ---
@@ -47,83 +60,88 @@ week-02/
 ## How to run the code
 
 ```bash
-cd week-02/codes/class-01-navigation-forms-tables
+cd week-02/codes/class-03-css-fundamentals
 ```
 
-Open with Live Server. There is still no CSS in these files — that starts in C3.
+Open the folder in VS Code, right click `index.html`, choose **Open with Live Server**. Keep `styles.css` in the same folder or the link breaks.
 
-For the accessibility class, open **`before/index.html` first** and try to find the problems yourself. Only open `after/index.html` once you have written your list. To compare them, select both files in the VS Code explorer, right click, and choose **Compare Selected**.
+**Compare `class-03-css-fundamentals/index.html` with `class-01-navigation-forms-tables/register.html`.** Select both in the VS Code explorer, right click, choose **Compare Selected**. Only the `<link>` line differs — everything you see on screen changed, and the structure did not. That is what semantic HTML buys you.
+
+For the two broken folders (`class-02-accessibility/before/` and `class-04-layout-practice/starter/`), work on them yourself before opening the matching `after/` or `solution/` folder.
 
 ---
 
-## What you should be able to do after C1 and C2
+## What you should be able to do after this week
 
 - Build a navigation menu that is consistent across pages and marks the current page
-- Choose the right form control: text, email, number, date, radio, checkbox, select, textarea
-- Group related fields with `fieldset` and `legend`
-- Add validation with HTML attributes alone, and explain why that is not security
+- Choose the right form control and group fields with `fieldset` and `legend`
 - Build a data table with `caption`, `thead`/`tbody`, `th` and `scope`
-- Explain when a table is the wrong choice
 - Check landmarks, heading order, alt text, labels, keyboard access, focus and contrast
-- Run a Lighthouse accessibility audit and explain why a score of 100 is not proof
-
----
-
-## Deliberate bugs in the sample files
-
-These are teaching demonstrations. Do not "fix" them and do not copy them.
-
-**`class-01-.../snippets.html`**
-- A menu built from `<span>` tags that cannot be reached with Tab
-- Two radio buttons with different `name` values, so both can be selected
-- A `<label for="...">` whose value does not match any `id`
-
-**`class-02-accessibility/before/index.html`**
-Twelve accessibility problems, including a missing `lang`, no landmarks, a heading order that starts at `h3`, images with missing or useless `alt`, inputs with placeholders instead of labels, a `<div>` used as a button, colour-only instructions, failing contrast, and a table with no headers.
+- Link an external stylesheet and select elements by tag, class and id
+- Control text, and choose between `px`, `%`, `em`, `rem` and `vh`
+- Explain the box model and why `box-sizing: border-box` matters
+- Use `display` and background properties correctly
+- Debug a layout in DevTools instead of guessing
 
 ---
 
 ## Assignments
 
-### Class 1 — Navigation, Forms and Tables (5 marks)
+Every class has a Part 1 (in class, verified before you leave) and a Part 2 (home task, due before the next class). Each class is worth 5 marks.
 
-**Part 1 — in class, last 5 minutes (2 marks)**
-Add two more rows to the routine table for C3 and C4. Add a `tel` input with a proper label. Show that clicking each label focuses its input.
+### C1 — Navigation, Forms and Tables
 
-**Part 2 — home task, before Week 2 Class 3 (3 marks)**
-Build `feedback.html` with two fieldsets, one radio group, one checkbox group, one select and one textarea, plus a results table with a caption and `scope` on every header cell. Link it from your nav on every page. Commit and push.
+**Part 1 (2 marks)** — Add two rows to the routine table; add a `tel` input with a proper label; show that clicking each label focuses its input.
 
-**Rubric**
+**Part 2 (3 marks)** — Build `feedback.html` with two fieldsets, a radio group, a checkbox group, a select and a textarea, plus a results table with a caption and `scope` on every header cell. Link it from your nav.
+
+### C2 — Accessibility Essentials
+
+**Part 1 (2 marks)** — Fix at least four problems in `before/index.html`. Show the Lighthouse score before and after, and tab through the page with no mouse.
+
+**Part 2 (3 marks)** — Audit your own `register.html` against the ten-point checklist, fix every failure, and write `audit-report.md`.
+
+### C3 — CSS Fundamentals and the Box Model
+
+**Part 1 (2 marks)** — Change the header background colour while keeping text contrast passing; add `:hover` **and** `:focus` styles to the Register button; show the focus style using only the Tab key.
+
+**Part 2 (3 marks)** — Apply `styles.css` to every page you have built. Required: a `box-sizing` reset, a centred container with `max-width`, a styled nav, styled form controls and a styled table. All contrast must still pass 4.5 : 1, and both `:hover` and `:focus` must be styled on every link and button.
+
+### C4 — Layout Practice
+
+**Part 1 (2 marks)** — Show your fixed starter page with at least six of the eight bugs corrected, and explain one fix using the DevTools box model diagram.
+
+**Part 2 (3 marks)** — Finish all eight fixes and Exercises 2–4, build the dashboard page, and write `fixes.md` describing each bug and its fix.
+
+---
+
+## Rubrics
+
+**C3 — 5 marks**
 
 | Criterion | Marks |
 |---|---|
-| Navigation present and consistent across pages | 1.0 |
-| Form controls correct: radio group, checkbox, select | 1.5 |
-| Every input has a correctly linked label | 1.0 |
-| Table with caption, thead/tbody and scope | 1.5 |
+| External stylesheet linked and applied to all pages | 1.0 |
+| `box-sizing` reset and a centred `max-width` container | 1.5 |
+| Nav, form and table styled and readable | 1.5 |
+| `:hover` and `:focus` both styled; contrast still passes | 1.0 |
 
-### Class 2 — Accessibility Essentials (5 marks)
-
-**Part 1 — in class, last 5 minutes (2 marks)**
-Fix at least four accessibility problems in `before/index.html`. Run Lighthouse before and after and show both scores. Tab through the fixed page with no mouse.
-
-**Part 2 — home task, before Week 2 Class 3 (3 marks)**
-Audit your own `register.html` against the ten-point checklist, fix every failure, and write `audit-report.md` using the supplied template. Commit and push both files.
-
-**Rubric**
+**C4 — 5 marks**
 
 | Criterion | Marks |
 |---|---|
-| Landmarks and heading order correct | 1.0 |
-| All images and form controls correctly named | 1.5 |
-| Page fully usable with the keyboard, focus visible | 1.5 |
-| Audit report explains each problem and its fix | 1.0 |
+| Six or more of the eight planted bugs fixed | 1.5 |
+| `display` drill correct, with the written explanation | 1.0 |
+| Spacing and background exercise complete | 1.0 |
+| Dashboard page built with correct box model use | 1.5 |
+
+C1 and C2 rubrics are on their respective assignment slides.
 
 ---
 
 ## The ten-point accessibility checklist
 
-This is used to mark **every** mini project and the mid-term practical, starting now.
+Used to mark **every** mini project and the mid-term practical, starting now.
 
 1. Exactly one `h1`, and heading levels never skip downwards
 2. `header`, `nav`, `main` and `footer` present; exactly one `main`
@@ -136,7 +154,7 @@ This is used to mark **every** mini project and the mid-term practical, starting
 9. Focus is always visible; `outline: none` is never used without a replacement
 10. Text contrast is at least 4.5 : 1, and colour is never the only signal
 
-Full version with test procedures: [`study-materials/handouts/accessibility-checklist.md`](study-materials/handouts/accessibility-checklist.md).
+Full version: [`study-materials/handouts/accessibility-checklist.md`](study-materials/handouts/accessibility-checklist.md)
 
 ---
 
@@ -146,10 +164,15 @@ Full version with test procedures: [`study-materials/handouts/accessibility-chec
 |---|---|
 | Both radio buttons can be selected | Give every option in the group the same `name` |
 | Clicking the label does nothing | `for` and `id` do not match exactly |
-| Table looks shifted | A `tr`, `th` or `td` is unclosed, or a row has the wrong number of cells |
 | Cannot Tab to a control | It is a `div` with an onclick. Use a real `<button>` |
-| Screen reader reads a file name aloud | The image has no `alt`. Use `alt=""` for decoration |
-| Lighthouse says contrast fails | Darken the text or lighten the background until 4.5 : 1 |
+| My box is wider than the width I set | No `box-sizing: border-box` |
+| `width` and `height` do nothing | The element is `inline`. Use `inline-block` |
+| The gap is bigger than I asked for | Margin collapse — the larger margin wins, they do not add |
+| `margin: 0 auto` is not centring | The box needs a width **and** must be `block` |
+| Nothing I write has any effect | 404 on `styles.css`, or a missing semicolon on the line above |
+| The background image does not show | Wrong path, or the box has zero height. `url()` is relative to the CSS file |
+
+Full debugging routine: [`study-materials/handouts/box-model-debug-guide.md`](study-materials/handouts/box-model-debug-guide.md)
 
 ---
 
@@ -157,13 +180,18 @@ Full version with test procedures: [`study-materials/handouts/accessibility-chec
 
 - [MDN — HTML forms guide](https://developer.mozilla.org/en-US/docs/Learn/Forms)
 - [MDN — HTML table basics](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics)
-- [web.dev — Learn Forms](https://web.dev/learn/forms/)
-- [web.dev — Learn Accessibility](https://web.dev/learn/accessibility/)
 - [MDN — HTML: A good basis for accessibility](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML)
+- [web.dev — Learn Accessibility](https://web.dev/learn/accessibility/)
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+- [MDN — CSS first steps](https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps)
+- [MDN — The box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model)
+- [web.dev — Learn CSS](https://web.dev/learn/css/)
+- [Chrome DevTools — Inspect CSS](https://developer.chrome.com/docs/devtools/css)
 
 ---
 
 ## Next week
 
-Week 3 covers Flexbox, CSS Grid and responsive design, and ends with the **Mini Project 1 evaluation** in C4: a semantic HTML and CSS responsive page, deployed. The pages you build this week are what MP1 is built on.
+Week 3 covers Flexbox, CSS Grid and responsive design, then specificity and the cascade, and ends with the **Mini Project 1 evaluation** in C4: a semantic HTML and CSS responsive page, deployed.
+
+Everything you built in Weeks 1 and 2 is what MP1 is marked on. If you completed both home tasks this week, most of the work is already done.

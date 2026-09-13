@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 3, Class 1 | Live build: a responsive page
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  This is the page built live in class. It uses:
+    - Flexbox for the header and the card row
+    - Grid for the gallery
+    - Mobile-first media queries with two breakpoints
+
+  HOW TO TEST
+  1. Open with Live Server.
+  2. Press F12, then Ctrl+Shift+M for device mode.
+  3. Try 360px, 768px and 1280px.
+  4. Then drag the window edge slowly and watch where the layout changes.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Without this, a phone pretends to be 980px wide and shrinks
+       the whole page. It has been in your files since Week 1;
+       now you know what it does. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Responsive course listing page built with Flexbox and CSS Grid.">
+  <title>IIUC Courses | CSE-2340</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Flexbox: title left, links right, wrapping to a column on a phone -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1>IIUC Courses</h1>
+
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="#main-content" aria-current="page">Home</a></li>
+          <li><a href="#weeks">Weeks</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+
+    <section class="intro">
+      <h2>Software Development 1</h2>
+      <p>A practical foundation in modern front-end development. Fifteen weeks,
+        six mini projects, one group showcase.</p>
+    </section>
+
+    <!-- Flexbox: a row of cards that wraps by itself, no media query -->
+    <section id="weeks">
+      <h2>Current Weeks</h2>
+
+      <div class="card-row">
+        <article class="card">
+          <h3>Week 1</h3>
+          <p>Web architecture, the development environment, semantic HTML and Git.</p>
+          <a href="#" class="btn">Open</a>
+        </article>
+
+        <article class="card">
+          <h3>Week 2</h3>
+          <p>Navigation, forms, tables, accessibility, CSS and the box model.</p>
+          <a href="#" class="btn">Open</a>
+        </article>
+
+        <article class="card">
+          <h3>Week 3</h3>
+          <p>Flexbox, CSS Grid, responsive design, and Mini Project 1.</p>
+          <a href="#" class="btn">Open</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Grid: auto-fit and minmax. Also no media query. -->
+    <section id="gallery">
+      <h2>All Weeks</h2>
+
+      <div class="gallery">
+        <article class="tile"><h3>Week 1</h3><p>Semantic HTML</p></article>
+        <article class="tile"><h3>Week 2</h3><p>CSS and the box model</p></article>
+        <article class="tile"><h3>Week 3</h3><p>Flexbox and Grid</p></article>
+        <article class="tile"><h3>Week 4</h3><p>Positioning and Tailwind</p></article>
+        <article class="tile"><h3>Week 5</h3><p>JavaScript fundamentals</p></article>
+        <article class="tile"><h3>Week 6</h3><p>The DOM and events</p></article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Department of Computer Science and Engineering, IIUC.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Department of Computer Science and Engineering, IIUC.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

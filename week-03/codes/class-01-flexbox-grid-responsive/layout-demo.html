@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 3, Class 1 | Flexbox and Grid demonstration
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  Open with Live Server and scroll while explaining each slide.
+  Change values live in DevTools — that is what this file is for.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSE-2340 | Flexbox and Grid Demo</title>
+  <link rel="stylesheet" href="layout-demo.css">
+</head>
+
+<body>
+
+  <h1>Flexbox and Grid &mdash; Demonstration</h1>
+  <p>Open DevTools. Click the small <strong>flex</strong> or <strong>grid</strong> badge
+    next to any container in the Elements panel to see the overlay.</p>
+  <hr>
+
+  <!-- ===== 1. THE PROBLEM ===== -->
+  <h2>1. Without Flexbox</h2>
+  <div class="demo no-flex">
+    <div class="item">one</div>
+    <div class="item">two</div>
+    <div class="item">three</div>
+  </div>
+  <p>Three <code>div</code> elements. They are block, so each takes a full line.</p>
+
+  <h2>With one line: <code>display: flex</code></h2>
+  <div class="demo is-flex">
+    <div class="item">one</div>
+    <div class="item">two</div>
+    <div class="item">three</div>
+  </div>
+  <hr>
+
+  <!-- ===== 2. JUSTIFY-CONTENT ===== -->
+  <h2>2. justify-content &mdash; along the main axis</h2>
+
+  <p><code>flex-start</code> (default)</p>
+  <div class="demo is-flex jc-start"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+
+  <p><code>center</code></p>
+  <div class="demo is-flex jc-center"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+
+  <p><code>flex-end</code></p>
+  <div class="demo is-flex jc-end"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+
+  <p><code>space-between</code> &mdash; the nav bar pattern</p>
+  <div class="demo is-flex jc-between"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+
+  <p><code>space-around</code></p>
+  <div class="demo is-flex jc-around"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+  <hr>
+
+  <!-- ===== 3. ALIGN-ITEMS ===== -->
+  <h2>3. align-items &mdash; along the cross axis</h2>
+
+  <p><code>stretch</code> (default) &mdash; items fill the container height</p>
+  <div class="demo is-flex tall ai-stretch"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+
+  <p><code>center</code> &mdash; vertical centring, finally</p>
+  <div class="demo is-flex tall ai-center"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+
+  <p><code>flex-start</code></p>
+  <div class="demo is-flex tall ai-start"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+  <hr>
+
+  <!-- ===== 4. DIRECTION AND WRAP ===== -->
+  <h2>4. flex-direction and flex-wrap</h2>
+
+  <p><code>flex-direction: column</code> &mdash; the axes swap over</p>
+  <div class="demo is-flex dir-column tall"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+
+  <p><code>flex-wrap: nowrap</code> (default) &mdash; eight items squash</p>
+  <div class="demo is-flex nowrap">
+    <div class="item wide">1</div><div class="item wide">2</div><div class="item wide">3</div><div class="item wide">4</div>
+    <div class="item wide">5</div><div class="item wide">6</div><div class="item wide">7</div><div class="item wide">8</div>
+  </div>
+
+  <p><code>flex-wrap: wrap</code> &mdash; they drop to a second line instead</p>
+  <div class="demo is-flex wrap">
+    <div class="item wide">1</div><div class="item wide">2</div><div class="item wide">3</div><div class="item wide">4</div>
+    <div class="item wide">5</div><div class="item wide">6</div><div class="item wide">7</div><div class="item wide">8</div>
+  </div>
+  <hr>
+
+  <!-- ===== 5. FLEX ON ITEMS ===== -->
+  <h2>5. Sizing items with flex</h2>
+
+  <p>All <code>flex: 1</code> &mdash; equal share of the space</p>
+  <div class="demo is-flex gap"><div class="item f1">flex: 1</div><div class="item f1">flex: 1</div><div class="item f1">flex: 1</div></div>
+
+  <p>One <code>flex: 2</code> &mdash; twice the share</p>
+  <div class="demo is-flex gap"><div class="item f1">flex: 1</div><div class="item f2">flex: 2</div><div class="item f1">flex: 1</div></div>
+
+  <p><code>flex: 0 0 240px</code> &mdash; fixed, does not grow or shrink</p>
+  <div class="demo is-flex gap"><div class="item fixed">0 0 240px</div><div class="item f1">flex: 1</div></div>
+  <hr>
+
+  <!-- ===== 6. GRID ===== -->
+  <h2>6. CSS Grid &mdash; two dimensions at once</h2>
+
+  <p><code>grid-template-columns: repeat(3, 1fr)</code></p>
+  <div class="grid-3">
+    <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+    <div class="item">4</div><div class="item">5</div><div class="item">6</div>
+  </div>
+
+  <p><code>grid-template-columns: 2fr 1fr</code> &mdash; the first column is twice as wide</p>
+  <div class="grid-2-1">
+    <div class="item">2fr</div><div class="item">1fr</div>
+    <div class="item">2fr</div><div class="item">1fr</div>
+  </div>
+  <hr>
+
+  <!-- ===== 7. THE RESPONSIVE GRID ===== -->
+  <h2>7. The one grid line worth memorising</h2>
+  <p><code>repeat(auto-fit, minmax(200px, 1fr))</code> &mdash;
+    <strong>drag the browser edge slowly</strong> and watch the column count change.
+    There is no media query anywhere in this example.</p>
+  <div class="grid-auto">
+    <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+    <div class="item">4</div><div class="item">5</div><div class="item">6</div>
+    <div class="item">7</div><div class="item">8</div>
+  </div>
+  <hr>
+
+  <!-- ===== 8. THE NAV BAR PATTERN ===== -->
+  <h2>8. The pattern you will use most</h2>
+  <header class="site-header">
+    <strong>IIUC Courses</strong>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Courses</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <p>Title on the left, links on the right, everything on the same vertical line.
+    Three declarations: <code>display: flex</code>, <code>justify-content: space-between</code>,
+    <code>align-items: center</code>.</p>
+
+</body>
+
+</html>

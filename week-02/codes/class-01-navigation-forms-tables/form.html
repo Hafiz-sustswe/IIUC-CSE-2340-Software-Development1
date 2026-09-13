@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Form Example</title>
+  </head>
+  <body>
+    <form action="home.html" method="post">
+      <fieldset>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" />
+        <br />
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          minlength="8"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        />
+        <label> Inpute Type </label>
+        <input type="password" />
+      </fieldset>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

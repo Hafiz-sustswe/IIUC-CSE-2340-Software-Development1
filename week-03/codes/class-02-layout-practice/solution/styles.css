@@ -1,0 +1,285 @@
+/* ============================================================
+   CSE-2340 | Week 3, Class 2 | PRACTICE SOLUTION STYLESHEET
+
+   All seven CSS bugs are fixed. Each fix is marked FIX n with a
+   note explaining what was wrong and why the fix works.
+   (Bug 8, the missing viewport meta tag, was in index.html.)
+
+   Compare with ../starter/styles.css in VS Code: select both,
+   right click, Compare Selected.
+
+   Written MOBILE-FIRST. Read it in this order:
+
+     1. Reset and base          (applies everywhere)
+     2. Layout: phone           (no media query at all)
+     3. @media (min-width: 768px)   tablet and up
+     4. @media (min-width: 1024px)  laptop and up
+
+   Notice how little is inside the media queries. That is the
+   point of mobile-first: you ADD for bigger screens instead of
+   UNDOING for smaller ones.
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   1. RESET AND BASE
+   ------------------------------------------------------------ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #3D4A57;
+  background-color: #F7F9FB;
+}
+
+h1, h2, h3 {
+  color: #003366;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.1rem; }
+
+p { margin-bottom: 12px; }
+
+a:focus,
+.btn:focus {
+  outline: 3px solid #E39A18;
+  outline-offset: 2px;
+}
+
+.skip-link { position: absolute; left: -999px; }
+.skip-link:focus {
+  position: static;
+  display: inline-block;
+  margin: 8px;
+  padding: 8px;
+  background-color: #FFFFFF;
+}
+
+
+/* ------------------------------------------------------------
+   2. LAYOUT — PHONE (the base, no media query)
+   Everything stacks. This is the simplest possible arrangement,
+   which is exactly why it needs no rules to achieve.
+   ------------------------------------------------------------ */
+
+.container {
+  width: 92%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* --- header --- */
+
+.site-header {
+  background-color: #003366;
+  color: #FFFFFF;
+  padding: 16px 0;
+}
+
+.header-inner {
+  /* FIX 2a/3a — display: flex is what makes this a flex container
+     at all. Without it, flex-direction, justify-content and
+     align-items are all ignored silently. */
+  display: flex;
+  flex-direction: column;   /* stacked on a phone */
+  gap: 8px;
+}
+
+.site-header h1 { color: #FFFFFF; margin-bottom: 0; }
+
+.site-header nav ul {
+  /* FIX 1 — the links were stacked. An li is display: block, so
+     each took a full line. display: flex on the PARENT (the ul)
+     puts its children in a row. Note it goes on the container,
+     never on the items. */
+  display: flex;            /* the links stay in a row even on a phone */
+  flex-wrap: wrap;          /* but they wrap if there is no space */
+  gap: 16px;
+  list-style: none;
+}
+
+.site-header a {
+  color: #BFD3E6;
+  text-decoration: none;
+}
+
+.site-header a:hover,
+.site-header a:focus {
+  color: #E39A18;
+}
+
+/* --- sections --- */
+
+main { padding: 24px 0; }
+
+section { margin-bottom: 32px; }
+
+/* --- cards: a flex row that wraps by itself --- */
+
+.card-row {
+  display: flex;
+
+  /* FIX 4 — without wrap, flex items shrink below their natural
+     size rather than moving to a second line. nowrap is the
+     default, which surprises everyone once. */
+  flex-wrap: wrap;
+
+  /* FIX 5 — gap adds space BETWEEN items only, with nothing on
+     the outside edges. Using margin here would push the first
+     and last cards away from the container too. */
+  gap: 20px;
+}
+
+.card {
+  /* grow, shrink, but never narrower than 280px.
+     On a phone one card fills the row; on a laptop three fit.
+     No media query is involved. */
+  flex: 1 1 280px;
+
+  background-color: #FFFFFF;
+  border: 1px solid #D6DEE6;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.btn {
+  display: inline-block;    /* an <a> is inline: width and padding need this */
+  padding: 10px 18px;
+  background-color: #003366;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #0A4A85;
+}
+
+/* --- gallery: grid, one column by default --- */
+
+.gallery {
+  /* FIX 6 — without display: grid the tiles are just block
+     elements, so they stack in one column and gap does nothing.
+     One column on a phone is correct, but it must be a GRID
+     doing it, or the media query below has nothing to change. */
+  display: grid;
+  gap: 16px;
+}
+
+.tile {
+  background-color: #FFFFFF;
+  border: 1px solid #D6DEE6;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* --- footer --- */
+
+.site-footer {
+  background-color: #E8EEF4;
+  padding: 20px 0;
+  text-align: center;
+  color: #6B7A88;
+  font-size: 0.9rem;
+}
+
+
+/* ------------------------------------------------------------
+   3. TABLET AND UP — 768px
+   The header becomes a row, and the gallery becomes a real grid.
+   ------------------------------------------------------------ */
+
+@media (min-width: 768px) {
+
+  .header-inner {
+    flex-direction: row;             /* side by side now */
+
+    /* FIX 2b — the main axis. space-between pushes the first item
+       to the start and the last to the end, with the free space
+       in between. This is the nav bar pattern. */
+    justify-content: space-between;
+
+    /* FIX 3b — the cross axis. Without it the items stretch to
+       full height and their text sits at the top, so the title
+       and the links look misaligned. */
+    align-items: center;
+  }
+
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+
+  .gallery {
+    /* FIX 7 — repeat(3, 1fr) forces exactly three columns at every
+       width, so tiles overflow on a narrow tablet and waste space
+       on a wide monitor. auto-fit fits as many columns as will
+       comfortably fit; minmax says never narrower than 240px,
+       otherwise share the leftover space equally.
+
+       The column count now changes on its own, with no further
+       media query. */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  main { padding: 32px 0; }
+}
+
+
+/* ------------------------------------------------------------
+   4. LAPTOP AND UP — 1024px
+   Only spacing changes. If a breakpoint needs many rules, the
+   base layout was probably wrong.
+   ------------------------------------------------------------ */
+
+@media (min-width: 1024px) {
+
+  h1 { font-size: 2rem; }
+
+  main { padding: 40px 0; }
+
+  section { margin-bottom: 48px; }
+}
+
+
+/* ============================================================
+   SUMMARY OF THE EIGHT FIXES
+
+   1. display: flex on .site-header nav ul    — links stacked
+   2. display: flex + justify-content: space-between
+                                              — title and links jammed
+   3. align-items: center                     — not on one line
+   4. flex-wrap: wrap on .card-row            — cards squashing
+   5. gap: 20px on .card-row                  — no space between cards
+   6. display: grid on .gallery               — single column always
+   7. repeat(auto-fit, minmax(240px, 1fr))    — fixed column count
+   8. the viewport meta tag in index.html     — zoomed-out phone view
+
+   Six of the eight are a missing declaration on a CONTAINER, not
+   on an item. That is the single most useful pattern to take away:
+   when a layout does nothing, check the parent first.
+   ============================================================ */
+
+
+/* ============================================================
+   TRY THIS YOURSELF
+
+   1. Delete the viewport meta tag from index.html and reload in
+      device mode at 360px. Put it back.
+   2. Change flex: 1 1 280px to flex: 1 1 500px and resize.
+      How many cards fit per row now?
+   3. Change minmax(240px, 1fr) to minmax(400px, 1fr).
+   4. Move the 768px media query ABOVE the base rules. What
+      breaks, and why? (Order matters: later rules win.)
+   ============================================================ */
