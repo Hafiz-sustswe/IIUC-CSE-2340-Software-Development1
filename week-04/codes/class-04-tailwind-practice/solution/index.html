@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 4, Class 4 | PRACTICE SOLUTION
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  ============================================================
+  SOLUTION. All six bugs are fixed, each marked FIX n.
+  ============================================================
+
+  Open this file beside ../starter/index.html in VS Code
+  (select both, right click, Compare Selected) to see exactly
+  which class names changed.
+
+  Notice the pattern: four of the six are a missing class, not a
+  wrong one. A layout utility does nothing unless the display
+  utility it depends on is there too.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Cards | CSE-2340 Tailwind Solution</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+      --color-iiuc-amber: #E39A18;
+
+      /* FIX 4 — text-iiuc was used on the page heading but the token
+         did not exist, so Tailwind generated no CSS for it and the
+         heading fell back to the inherited colour. An unknown utility
+         fails silently, exactly like a misspelt CSS property. */
+      --color-iiuc: #003366;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-700">
+
+  <!-- FIX 2 — justify-between, items-center and gap only apply to a
+       flex or grid container. The div had neither, so all three were
+       ignored. One class switches them all on. -->
+  <header class="sticky top-0 z-10 bg-blue-900 text-white">
+    <div class="mx-auto w-11/12 max-w-5xl py-4
+                flex flex-col gap-3
+                md:flex-row md:justify-between md:items-center md:gap-5">
+      <strong class="text-lg">IIUC &middot; CSE Courses</strong>
+      <nav aria-label="Main navigation">
+        <ul class="flex flex-wrap gap-5">
+          <!-- FIX 5 — hover: only helps mouse users. focus: is the
+               keyboard equivalent and must be written alongside it,
+               every time. The outline classes make it visible. -->
+          <li><a href="#main-content"
+                 class="text-blue-100 hover:text-amber-400
+                        focus:text-amber-400 focus:outline-2 focus:outline-amber-400
+                        focus:outline-offset-2">Courses</a></li>
+          <li><a href="#tiles"
+                 class="text-blue-100 hover:text-amber-400
+                        focus:text-amber-400 focus:outline-2 focus:outline-amber-400
+                        focus:outline-offset-2">Weeks</a></li>
+          <li><a href="#about"
+                 class="text-blue-100 hover:text-amber-400
+                        focus:text-amber-400 focus:outline-2 focus:outline-amber-400
+                        focus:outline-offset-2">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="mx-auto w-11/12 max-w-5xl py-8">
+
+    <!-- FIX 4 (continued) — the class name was already correct here.
+         The token it referred to was the thing that was missing. -->
+    <h1 class="text-3xl font-bold text-iiuc mb-4">Our Courses</h1>
+
+    <p class="mb-6">Three cards below, then a tile grid. Resize the window and
+      watch what does and does not change.</p>
+
+    <!-- FIX 1 — the prefixes were the wrong way round. Every Tailwind
+         prefix is min-width, so the UNPREFIXED class is the phone and
+         md: applies from 768px upwards. "flex md:flex-col" meant a row
+         on a phone and a column on a laptop, the opposite of what was
+         wanted. -->
+    <section class="flex flex-col md:flex-row gap-5 mb-12">
+
+      <!-- FIX 6 — w-[420px] is a fixed width, so on a 360px screen the
+           card overflowed and produced a horizontal scrollbar. flex-1
+           lets each card share the row and shrink when there is no
+           space. -->
+      <article class="relative flex-1 bg-white border border-gray-300 rounded-lg overflow-hidden">
+        <span class="absolute top-3 right-3 z-10 bg-iiuc-amber text-amber-950
+                     text-xs font-bold px-2.5 py-1 rounded-full">NEW</span>
+        <div class="h-36 bg-gray-200"></div>
+        <div class="p-5">
+          <h2 class="text-lg font-bold text-blue-900 mb-1">CSE-2340</h2>
+          <p class="text-sm text-gray-500">2 credits &middot; 3rd semester</p>
+        </div>
+      </article>
+
+      <article class="relative flex-1 bg-white border border-gray-300 rounded-lg overflow-hidden">
+        <span class="absolute top-3 right-3 z-10 bg-iiuc-amber text-amber-950
+                     text-xs font-bold px-2.5 py-1 rounded-full">NEW</span>
+        <div class="h-36 bg-gray-200"></div>
+        <div class="p-5">
+          <h2 class="text-lg font-bold text-blue-900 mb-1">CSE-1221</h2>
+          <p class="text-sm text-gray-500">3 credits &middot; 2nd semester</p>
+        </div>
+      </article>
+
+      <article class="relative flex-1 bg-white border border-gray-300 rounded-lg overflow-hidden">
+        <div class="h-36 bg-gray-200"></div>
+        <div class="p-5">
+          <h2 class="text-lg font-bold text-blue-900 mb-1">CSE-3532</h2>
+          <p class="text-sm text-gray-500">3 credits &middot; 5th semester</p>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- FIX 3 — grid-cols-3 sets grid-template-columns, which does
+         nothing unless the element is display: grid. Exactly the same
+         mistake as bug 2, one level along: a layout utility needs its
+         display utility. The responsive prefixes are added so the
+         tiles also behave on a phone. -->
+    <section id="tiles" class="mb-12">
+      <h2 class="text-2xl font-bold text-blue-900 mb-4">Weeks</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 1</article>
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 2</article>
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 3</article>
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 4</article>
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 5</article>
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 6</article>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="text-2xl font-bold text-blue-900 mb-4">About</h2>
+      <p class="mb-3">Scroll this section to check the sticky header.</p>
+      <p class="mb-3">The department runs a practical, project-based curriculum.</p>
+      <p class="mb-3">Students build and deploy real applications.</p>
+      <p class="mb-3">Every course is assessed by individual demonstration.</p>
+      <p class="mb-3">Mini projects are evaluated in dedicated classes.</p>
+      <p>Teams for the final project are formed in Week 8.</p>
+    </section>
+
+  </main>
+
+  <footer class="bg-gray-100 text-gray-500 text-sm">
+    <div class="mx-auto w-11/12 max-w-5xl py-6 text-center">
+      <p>&copy; 2026 Department of Computer Science and Engineering, IIUC.</p>
+    </div>
+  </footer>
+
+  <!--
+    ============================================================
+    SUMMARY OF THE SIX FIXES
+
+    1. flex-col md:flex-row       — prefixes were reversed
+    2. flex on the header div     — gap/justify need a flex container
+    3. grid on the tile container — grid-cols needs display: grid
+    4. --color-iiuc in @theme     — the token did not exist
+    5. focus: alongside hover:    — keyboard users had no feedback
+    6. flex-1 instead of w-[420px]— fixed width overflowed at 360px
+
+    Four of the six are a MISSING class, not a wrong one. When a
+    utility appears to do nothing, ask what it depends on.
+    ============================================================
+  -->
+
+</body>
+
+</html>

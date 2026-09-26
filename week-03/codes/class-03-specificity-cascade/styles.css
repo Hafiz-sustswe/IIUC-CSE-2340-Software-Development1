@@ -1,0 +1,356 @@
+/* ============================================================
+   CSE-2340 | Week 3, Class 3 | styles.css
+   The complete static page built live in class.
+
+   Written in the order we built it:
+
+     1. Tokens        (custom properties in :root)
+     2. Reset
+     3. Base typography
+     4. Layout        (container, header, sections)
+     5. Components    (card, tile, button, table)
+     6. States        (hover, focus — always together)
+     7. Responsive    (mobile-first, two breakpoints)
+
+   Every selector here is FLAT and LOW specificity: one class per
+   component, no nesting three levels deep, no ids, no !important.
+   That is the lesson from the first half of the class applied.
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   1. TOKENS
+   Declare a value once, use it everywhere with var().
+   Change the brand colour in one place instead of forty.
+   ------------------------------------------------------------ */
+
+:root {
+  --navy:   #003366;
+  --navy-2: #0A4A85;
+  --amber:  #E39A18;
+  --ink:    #3D4A57;
+  --muted:  #6B7A88;
+  --line:   #D6DEE6;
+  --bg:     #F7F9FB;
+  --panel:  #E8EEF4;
+  --white:  #FFFFFF;
+
+  --space:  20px;
+  --radius: 8px;
+}
+
+
+/* ------------------------------------------------------------
+   2. RESET
+   ------------------------------------------------------------ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ------------------------------------------------------------
+   3. BASE TYPOGRAPHY
+   Set once on body. Everything inherits it for free.
+   ------------------------------------------------------------ */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--bg);
+}
+
+h1, h2, h3 {
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.1rem; }
+
+p { margin-bottom: 12px; }
+
+ul { list-style: none; }
+
+
+/* ------------------------------------------------------------
+   4. LAYOUT
+   ------------------------------------------------------------ */
+
+.container {
+  width: 92%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+section { margin-bottom: 36px; }
+
+main { padding: 28px 0; }
+
+/* --- header: Flexbox, because it is ONE row --- */
+
+.site-header {
+  background-color: var(--navy);
+  padding: 14px 0;
+}
+
+.site-header__inner {
+  display: flex;
+  flex-direction: column;      /* stacked on a phone */
+  gap: 10px;
+}
+
+.brand {
+  color: var(--white);
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.nav a {
+  color: #BFD3E6;
+  text-decoration: none;
+}
+
+/* --- hero --- */
+
+.hero {
+  background-color: var(--navy-2);
+  color: var(--white);
+  padding: 40px 0;
+}
+
+.hero h1 { color: var(--white); }
+
+.hero__lead {
+  max-width: 52ch;             /* a comfortable reading width */
+  color: #DCE8F3;
+}
+
+/* --- footer --- */
+
+.site-footer {
+  background-color: var(--panel);
+  padding: 24px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+
+/* ------------------------------------------------------------
+   5. COMPONENTS
+   One class each. Flat selectors, easy to override later.
+   ------------------------------------------------------------ */
+
+/* --- facts list --- */
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space);
+  margin-top: 8px;
+}
+
+.facts li {
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  flex: 1 1 200px;
+}
+
+.facts strong {
+  color: var(--navy);
+  font-size: 1.3rem;
+}
+
+/* --- cards: Flexbox, because they are ONE wrapping row --- */
+
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space);
+}
+
+.card {
+  flex: 1 1 280px;             /* grow, shrink, never below 280px */
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space);
+}
+
+.card__meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* --- gallery: Grid, because it is rows AND columns --- */
+
+.gallery {
+  display: grid;
+  gap: var(--space);           /* one column on a phone */
+}
+
+.tile {
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+/* --- buttons --- */
+
+.btn {
+  display: inline-block;       /* an <a> is inline: this is required */
+  padding: 10px 18px;
+  background-color: var(--navy);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.btn--accent {
+  background-color: var(--amber);
+  color: #3A2700;
+  font-weight: bold;
+}
+
+/* --- table --- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;   /* one line between cells, not two */
+  margin-top: 8px;
+}
+
+caption {
+  text-align: left;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid var(--line);
+  text-align: left;
+}
+
+thead { background-color: var(--panel); }
+
+th { color: var(--navy); }
+
+tbody tr:nth-child(even) { background-color: var(--bg); }
+
+
+/* ------------------------------------------------------------
+   6. STATES
+   :hover AND :focus, together, every single time.
+   :hover alone helps only mouse users.
+   ------------------------------------------------------------ */
+
+.nav a:hover,
+.nav a:focus {
+  color: var(--amber);
+  text-decoration: underline;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: var(--navy-2);
+}
+
+.btn--accent:hover,
+.btn--accent:focus {
+  background-color: #C9860F;
+}
+
+/* Never outline: none. Replace it instead. */
+a:focus,
+.btn:focus,
+button:focus {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+}
+
+.skip-link:focus {
+  position: static;
+  display: inline-block;
+  margin: 8px;
+  padding: 8px;
+  background-color: var(--white);
+}
+
+
+/* ------------------------------------------------------------
+   7. RESPONSIVE
+   Mobile-first: the base above is the phone layout and uses no
+   media query. These blocks only ADD.
+   ------------------------------------------------------------ */
+
+@media (min-width: 768px) {
+
+  .site-header__inner {
+    flex-direction: row;             /* side by side now */
+    justify-content: space-between;  /* brand left, nav right */
+    align-items: center;             /* one vertical line */
+  }
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.6rem; }
+
+  .hero { padding: 56px 0; }
+
+  /* auto-fit works out the column count by itself */
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  main { padding: 36px 0; }
+}
+
+
+@media (min-width: 1024px) {
+
+  h1 { font-size: 2.4rem; }
+
+  main { padding: 44px 0; }
+
+  section { margin-bottom: 52px; }
+}
+
+
+/* ============================================================
+   THE PRE-SUBMISSION PASS
+
+   Before you submit anything built from this file:
+
+   1. Tab through the page. Every control reachable, focus visible.
+   2. Resize to 360px. No horizontal scrollbar.
+   3. Check contrast on every text/background pair (4.5 : 1).
+   4. Run Lighthouse, Accessibility only. Read every failure.
+   5. One h1, landmarks present, alt on every image.
+   6. Read your commit log: eight or more meaningful messages.
+
+   Every item is on the Mini Project 1 rubric, and each takes
+   under two minutes.
+   ============================================================ */

@@ -1,0 +1,287 @@
+/* ============================================================
+   CSE-2340 | Week 4, Class 2 | PRACTICE STARTER STYLESHEET
+
+   ============================================================
+   SOLUTION. All six bugs are fixed, each marked FIX n.
+   ============================================================
+
+   1. The NEW badge sits in the corner of the PAGE, not the card
+   2. top and left do nothing on the "Popular" tag
+   3. The header does not stick when you scroll
+   4. Page text scrolls through the header
+   5. The caption is hidden behind the image
+   6. z-index: 9999 on the tooltip still does not put it on top
+
+   Compare with ../starter/styles.css in VS Code: select both,
+   right click, Compare Selected.
+
+   Five of the six come down to two questions:
+     - Is this element positioned at all?
+     - Which ancestor is it measuring from?
+   ============================================================ */
+
+:root {
+  --navy:  #003366;
+  --navy2: #0A4A85;
+  --amber: #E39A18;
+  --ink:   #3D4A57;
+  --muted: #6B7A88;
+  --line:  #D6DEE6;
+  --bg:    #F7F9FB;
+  --panel: #E8EEF4;
+  --white: #FFFFFF;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--bg);
+}
+
+h1, h2 { color: var(--navy); margin-bottom: 10px; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.15rem; }
+p  { margin-bottom: 10px; }
+
+code {
+  font-family: "Courier New", monospace;
+  background-color: var(--panel);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.container { width: 92%; max-width: 1100px; margin: 0 auto; }
+
+main { padding: 28px 0; }
+
+section { margin-bottom: 36px; }
+
+.lead { color: var(--muted); }
+
+
+/* ---------- HEADER ---------- */
+
+.site-header {
+  /* FIX 3 — relative keeps the element in the flow and scrolls
+     away with it. sticky is the only value that pins an element
+     once it reaches a threshold. The top: 0 below was already
+     correct; it was simply being ignored. */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  /* FIX 4 — the background was 45% transparent, so page text
+     scrolling underneath showed through. A sticky or fixed bar
+     must have a fully opaque background. */
+  background-color: var(--navy);
+  color: var(--white);
+  padding: 14px 0;
+}
+
+.site-header__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.brand { font-size: 1.05rem; }
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  list-style: none;
+}
+
+.nav a { color: #BFD3E6; text-decoration: none; }
+.nav a:hover, .nav a:focus { color: var(--amber); }
+
+a:focus { outline: 3px solid var(--amber); outline-offset: 2px; }
+
+.skip-link { position: absolute; left: -999px; }
+.skip-link:focus {
+  position: static;
+  display: inline-block;
+  margin: 8px;
+  padding: 8px;
+  background-color: var(--white);
+}
+
+
+/* ---------- CARDS ---------- */
+
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  /* FIX 1 — the badge is position: absolute, so it looks up through
+     its ancestors for the first POSITIONED one. The card was static,
+     so the search reached the document and the badge measured from
+     the page corner. One declaration creates the context. */
+  position: relative;
+
+  overflow: hidden;
+
+  flex: 1 1 280px;
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.card__media {
+  position: relative;
+  height: 140px;
+}
+
+.card__placeholder {
+  height: 100%;
+  background-color: var(--panel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.card__caption {
+  /* FIX 5 — two things were missing. Without position: absolute the
+     offsets below did nothing, so the caption sat after the image in
+     normal flow. z-index then lifts it above the placeholder. Its
+     parent .card__media is already relative, so it measures from the
+     media area. */
+  position: absolute;
+  z-index: 1;
+
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: var(--white);
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.card__badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  background-color: var(--amber);
+  color: #3A2700;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.card__body { padding: 20px; }
+
+.card__meta { color: var(--muted); font-size: 0.85rem; }
+
+.card__tag {
+  /* FIX 2 — top, right, bottom, left and z-index are ignored on a
+     static element. relative is right here: the tag shifts visually
+     but keeps its space, so surrounding text does not reflow. */
+  position: relative;
+
+  top: -6px;
+  left: 8px;
+
+  display: inline-block;
+  background-color: var(--panel);
+  color: var(--navy);
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+
+/* ---------- TOOLTIP AND BANNER ---------- */
+
+.panel {
+  /* FIX 6 — position + z-index on this panel created a stacking
+     context. Everything inside is then stacked relative to the
+     PANEL, and the panel itself sits at level 1. The banner is at
+     level 5, so it covers the whole panel however large the
+     tooltip's z-index is. 9999 changed nothing because the child
+     was never competing with the banner at all.
+
+     The fix is to remove the z-index from the panel so it stops
+     creating a context. Raising the panel above 5 would also work.
+     Raising the child never would. */
+  position: relative;
+
+  background-color: var(--panel);
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.tooltip {
+  /* With the parent no longer trapping it, a modest value is
+     enough. 9999 was never the problem or the solution. */
+  position: relative;
+  z-index: 6;
+  display: inline-block;
+  background-color: var(--navy);
+  color: var(--white);
+  padding: 8px 14px;
+  border-radius: 4px;
+}
+
+.banner {
+  position: relative;
+  z-index: 5;
+  background-color: var(--amber);
+  color: #3A2700;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 8px;
+  margin-top: -24px;
+  margin-left: 60px;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+.site-footer {
+  background-color: var(--panel);
+  padding: 22px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+
+/* ---------- TABLET AND UP ---------- */
+
+@media (min-width: 768px) {
+  .site-header__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+
+/* ============================================================
+   SUMMARY OF THE SIX FIXES
+
+   1. position: relative on .card             — badge measured from the page
+   2. position: relative on .card__tag        — offsets ignored on static
+   3. position: sticky on .site-header        — relative scrolls away
+   4. opaque background on .site-header       — text showed through
+   5. position: absolute + z-index on caption — caption behind the image
+   6. removed z-index from .panel             — parent trapped the child
+
+   Four of the six are the same mistake: an element that was never
+   positioned in the first place. Before anything else, check the
+   computed position value in DevTools.
+   ============================================================ */

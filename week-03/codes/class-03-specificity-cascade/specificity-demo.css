@@ -1,0 +1,280 @@
+/* ============================================================
+   CSE-2340 | Week 3, Class 3 | specificity-demo.css
+
+   Every rule below is labelled with its specificity, written as
+   three numbers:  ids - classes - elements
+
+   Compare them LEFT TO RIGHT, like a version number.
+   1-0-0 beats 0-99-0. It is not a sum.
+   ============================================================ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #3D4A57;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+h1, h2, h3 { color: #003366; margin-bottom: 10px; }
+h2 { margin-top: 28px; }
+h3 { margin-top: 16px; font-size: 1.05rem; }
+p  { margin-bottom: 10px; }
+hr { border: none; border-top: 1px solid #D6DEE6; margin: 26px 0; }
+
+code {
+  font-family: "Courier New", monospace;
+  background-color: #F2F5F8;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+/* The question prompts */
+.q {                                    /* 0-1-0 */
+  font-weight: bold;
+  color: #8A5A05;
+}
+
+
+/* ------------------------------------------------------------
+   1. SOURCE ORDER
+   Identical specificity, so the LATER rule wins.
+   ------------------------------------------------------------ */
+
+.order-demo {                           /* 0-1-0 */
+  color: #B3261E;                       /* loses: same specificity, written first */
+}
+
+.order-demo {                           /* 0-1-0 */
+  color: #1F7A55;                       /* WINS: written later */
+}
+
+
+/* ------------------------------------------------------------
+   2. SPECIFICITY BEATS SOURCE ORDER
+   The class rule is written FIRST and still wins.
+   ------------------------------------------------------------ */
+
+.btn {                                  /* 0-1-0  — WINS */
+  background-color: #003366;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button {                                /* 0-0-1  — loses, despite being later */
+  background-color: #E39A18;
+}
+
+
+/* ------------------------------------------------------------
+   3. SPECIFICITY IS NOT A SUM
+   One id beats three classes.
+   ------------------------------------------------------------ */
+
+.page .content .card {                  /* 0-3-0  — loses */
+  color: #003366;
+  background-color: #F2F5F8;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+#sum-demo {                             /* 1-0-0  — WINS */
+  color: #B3261E;
+}
+
+
+/* ------------------------------------------------------------
+   4. INLINE STYLES
+   An inline style is effectively 1-0-0-0 and beats any selector.
+   ------------------------------------------------------------ */
+
+.loud {                                 /* 0-1-0  — loses to the inline style */
+  color: #1F7A55;
+  font-weight: bold;
+}
+
+
+/* ------------------------------------------------------------
+   5. !important
+   Beats everything, including an inline style.
+   This is a demonstration, not a recommendation.
+   ------------------------------------------------------------ */
+
+.shout {                                /* 0-1-0 + !important — WINS */
+  color: #1F7A55 !important;
+  font-weight: bold;
+}
+
+
+/* ------------------------------------------------------------
+   6. INHERITANCE
+   colour and font pass down. Box properties do not.
+   ------------------------------------------------------------ */
+
+.inherit-demo {                         /* 0-1-0 */
+  color: #0A4A85;
+  font-style: italic;
+  border: 2px solid #D6DEE6;
+  padding: 14px;
+  border-radius: 6px;
+}
+
+.inherit-box {                          /* 0-1-0 */
+  background-color: #F7F9FB;
+  margin-top: 8px;
+  padding: 8px;
+}
+
+
+/* ------------------------------------------------------------
+   7. FORM CONTROLS DO NOT INHERIT FONT
+   ------------------------------------------------------------ */
+
+input {                                 /* 0-0-1 */
+  padding: 8px;
+  border: 1px solid #D6DEE6;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 360px;
+  /* deliberately NOT inheriting: this is the trap */
+}
+
+.fixed-input {                          /* 0-1-0 */
+  font-family: inherit;
+  font-size: 16px;
+}
+
+
+/* ------------------------------------------------------------
+   8. PSEUDO-CLASSES
+   Each pseudo-class adds 0-1-0, which is why a:hover beats a.
+   ------------------------------------------------------------ */
+
+.link-demo {                            /* 0-1-0 */
+  display: inline-block;
+  margin-right: 14px;
+  padding: 6px 10px;
+  color: #003366;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.link-demo:hover {                      /* 0-2-0 */
+  border-bottom-color: #E39A18;
+}
+
+.link-demo:focus {                      /* 0-2-0 — never style hover alone */
+  outline: 3px solid #E39A18;
+  outline-offset: 2px;
+}
+
+/* Position-based */
+
+.list-demo {                            /* 0-1-0 */
+  list-style: none;
+  border: 1px solid #D6DEE6;
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 420px;
+}
+
+.list-demo li {                         /* 0-1-1 */
+  padding: 8px 12px;
+  border-bottom: 1px solid #D6DEE6;
+}
+
+.list-demo li:first-child {             /* 0-2-1 */
+  background-color: #E8EEF4;
+  font-weight: bold;
+}
+
+.list-demo li:last-child {              /* 0-2-1 */
+  border-bottom: none;
+  font-style: italic;
+}
+
+/* Zebra striping */
+
+.stripe-demo {                          /* 0-1-0 */
+  width: 100%;
+  max-width: 480px;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+.stripe-demo caption {                  /* 0-1-1 */
+  text-align: left;
+  font-style: italic;
+  color: #6B7A88;
+  margin-bottom: 6px;
+}
+
+.stripe-demo th,
+.stripe-demo td {                       /* 0-1-1 */
+  padding: 8px 10px;
+  border: 1px solid #D6DEE6;
+  text-align: left;
+}
+
+.stripe-demo thead {                    /* 0-1-1 */
+  background-color: #E8EEF4;
+}
+
+.stripe-demo tbody tr:nth-child(even) { /* 0-2-2 */
+  background-color: #F7F9FB;
+}
+
+
+/* ------------------------------------------------------------
+   9. YOUR TURN
+   Four rules target the same paragraph.
+   Work out the winner before you inspect it.
+
+   ANSWER (do not read until you have tried):
+   #wrapper .text wins with 1-1-0. The id in the selector settles
+   it immediately — the other three have no id at all.
+   ------------------------------------------------------------ */
+
+.text {                                 /* 0-1-0 */
+  color: #B3261E;
+}
+
+.outer .text {                          /* 0-2-0 */
+  color: #1F7A55;
+}
+
+.text.special {                         /* 0-2-0 */
+  color: #E39A18;
+}
+
+#wrapper .text {                        /* 1-1-0  — WINS */
+  color: #003366;
+  font-weight: bold;
+}
+
+.outer {                                /* 0-1-0 */
+  border: 2px dashed #D6DEE6;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+
+/* ============================================================
+   TRY THIS YOURSELF
+
+   1. In example 2, delete the .btn rule in DevTools. What colour
+      does the button become, and why?
+   2. In example 3, change #sum-demo to .sum-demo. Who wins now?
+   3. In example 5, remove !important. What takes over?
+   4. In example 9, add a rule  #wrapper .outer .text.special
+      What is its specificity, and does it win?
+   ============================================================ */

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 4, Class 3 | Tailwind utilities demonstration
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  Open with Live Server. Every section matches one slide.
+
+  This file uses the browser script, which compiles Tailwind in the
+  page. That is fine for learning and prototyping. It is NOT for a
+  deployed project. Mini Project 2 must use the Vite setup instead.
+  See setup-notes.md.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSE-2340 | Tailwind Utilities Demo</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+      --color-iiuc-navy:  #003366;
+      --color-iiuc-navy2: #0A4A85;
+      --color-iiuc-amber: #E39A18;
+      --color-iiuc-line:  #D6DEE6;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-700 leading-relaxed">
+
+  <div class="mx-auto w-11/12 max-w-4xl py-8">
+
+    <h1 class="text-3xl font-bold text-iiuc-navy mb-2">Tailwind Utilities</h1>
+    <p class="mb-8">Every class below is one CSS declaration you already know.</p>
+
+    <!-- ===== 1. SPACING SCALE ===== -->
+    <h2 class="text-2xl font-bold text-iiuc-navy mb-3">1. The spacing scale</h2>
+    <p class="mb-3">One step is 4px. <strong>p-4 is 16px, not 4px.</strong></p>
+
+    <div class="mb-3 bg-white border border-iiuc-line rounded-lg">
+      <div class="bg-sky-100 p-1">p-1 = 4px</div>
+    </div>
+    <div class="mb-3 bg-white border border-iiuc-line rounded-lg">
+      <div class="bg-sky-100 p-4">p-4 = 16px</div>
+    </div>
+    <div class="mb-8 bg-white border border-iiuc-line rounded-lg">
+      <div class="bg-sky-100 p-8">p-8 = 32px</div>
+    </div>
+
+    <!-- ===== 2. COLOUR SCALE ===== -->
+    <h2 class="text-2xl font-bold text-iiuc-navy mb-3">2. The colour scale</h2>
+    <p class="mb-3">Shades run 50 (nearly white) to 950 (nearly black).</p>
+
+    <div class="flex flex-wrap gap-2 mb-8">
+      <div class="bg-sky-100 p-3 text-sm rounded">100</div>
+      <div class="bg-sky-300 p-3 text-sm rounded">300</div>
+      <div class="bg-sky-500 p-3 text-sm text-white rounded">500</div>
+      <div class="bg-sky-700 p-3 text-sm text-white rounded">700</div>
+      <div class="bg-sky-900 p-3 text-sm text-white rounded">900</div>
+      <div class="bg-iiuc-amber p-3 text-sm text-amber-950 rounded">my token</div>
+    </div>
+
+    <!-- ===== 3. TEXT ===== -->
+    <h2 class="text-2xl font-bold text-iiuc-navy mb-3">3. Text</h2>
+    <p class="text-sm mb-1">text-sm</p>
+    <p class="text-base mb-1">text-base</p>
+    <p class="text-xl mb-1">text-xl</p>
+    <p class="text-3xl font-bold mb-1">text-3xl font-bold</p>
+    <p class="text-center mb-8 bg-white border border-iiuc-line rounded p-2">text-center</p>
+
+    <!-- ===== 4. FLEXBOX ===== -->
+    <h2 class="text-2xl font-bold text-iiuc-navy mb-3">4. Flexbox</h2>
+
+    <p class="mb-1 text-sm font-mono">flex gap-3</p>
+    <div class="flex gap-3 mb-3 bg-white border border-iiuc-line rounded p-3">
+      <div class="bg-iiuc-navy text-white p-3 rounded">one</div>
+      <div class="bg-iiuc-navy text-white p-3 rounded">two</div>
+      <div class="bg-iiuc-navy text-white p-3 rounded">three</div>
+    </div>
+
+    <p class="mb-1 text-sm font-mono">flex justify-between items-center</p>
+    <div class="flex justify-between items-center h-24 mb-8 bg-white border border-iiuc-line rounded p-3">
+      <div class="bg-iiuc-navy text-white p-3 rounded">left</div>
+      <div class="bg-iiuc-navy text-white p-3 rounded">right</div>
+    </div>
+
+    <!-- ===== 5. GRID ===== -->
+    <h2 class="text-2xl font-bold text-iiuc-navy mb-3">5. Grid</h2>
+    <p class="mb-1 text-sm font-mono">grid grid-cols-3 gap-3</p>
+    <div class="grid grid-cols-3 gap-3 mb-8">
+      <div class="bg-iiuc-navy2 text-white p-4 rounded text-center">1</div>
+      <div class="bg-iiuc-navy2 text-white p-4 rounded text-center">2</div>
+      <div class="bg-iiuc-navy2 text-white p-4 rounded text-center">3</div>
+      <div class="bg-iiuc-navy2 text-white p-4 rounded text-center">4</div>
+      <div class="bg-iiuc-navy2 text-white p-4 rounded text-center">5</div>
+      <div class="bg-iiuc-navy2 text-white p-4 rounded text-center">6</div>
+    </div>
+
+    <!-- ===== 6. RESPONSIVE ===== -->
+    <h2 class="text-2xl font-bold text-iiuc-navy mb-3">6. Responsive prefixes</h2>
+    <p class="mb-3"><strong>Resize the window slowly</strong> and watch the column
+      count change. One column, then two from 768px, then three from 1024px.</p>
+    <p class="mb-1 text-sm font-mono">grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+      <div class="bg-white border border-iiuc-line rounded p-4">Week 1</div>
+      <div class="bg-white border border-iiuc-line rounded p-4">Week 2</div>
+      <div class="bg-white border border-iiuc-line rounded p-4">Week 3</div>
+      <div class="bg-white border border-iiuc-line rounded p-4">Week 4</div>
+      <div class="bg-white border border-iiuc-line rounded p-4">Week 5</div>
+      <div class="bg-white border border-iiuc-line rounded p-4">Week 6</div>
+    </div>
+
+    <!-- ===== 7. STATES ===== -->
+    <h2 class="text-2xl font-bold text-iiuc-navy mb-3">7. States</h2>
+    <p class="mb-3">Hover over these, then reach them with the <strong>Tab</strong>
+      key. Both states are styled, as they always should be.</p>
+    <div class="flex flex-wrap gap-3 mb-8">
+      <a href="#" class="inline-block bg-iiuc-navy text-white px-4 py-2 rounded no-underline
+                         hover:bg-iiuc-navy2
+                         focus:bg-iiuc-navy2 focus:outline-3 focus:outline-iiuc-amber focus:outline-offset-2">
+        Both states
+      </a>
+      <a href="#" class="inline-block bg-gray-300 text-gray-700 px-4 py-2 rounded no-underline
+                         hover:bg-gray-400">
+        hover only (bad)
+      </a>
+    </div>
+
+    <!-- ===== 8. THE CARD PATTERN FROM C1 ===== -->
+    <h2 class="text-2xl font-bold text-iiuc-navy mb-3">8. The card pattern from C1</h2>
+    <p class="mb-3">Same positioning rules, shorter names:
+      <span class="font-mono text-sm">relative</span> on the card,
+      <span class="font-mono text-sm">absolute top-3 right-3</span> on the badge.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+      <article class="relative overflow-hidden rounded-lg border border-iiuc-line bg-white">
+        <div class="relative h-36">
+          <div class="flex h-full items-center justify-center bg-gray-100 text-sm text-gray-500">
+            course image
+          </div>
+          <p class="absolute inset-x-0 bottom-0 bg-black/55 px-3 py-2 text-sm text-white m-0">
+            inset-x-0 = left:0 and right:0
+          </p>
+        </div>
+        <span class="absolute top-3 right-3 z-20 rounded-full bg-iiuc-amber
+                     px-3 py-1 text-xs font-bold text-amber-950">NEW</span>
+        <div class="p-5">
+          <h3 class="text-lg font-bold text-iiuc-navy mb-1">CSE-2340</h3>
+          <p class="text-sm text-gray-500">2 credits &middot; 3rd semester</p>
+        </div>
+      </article>
+
+      <article class="relative overflow-hidden rounded-lg border border-iiuc-line bg-white">
+        <div class="relative h-36">
+          <div class="flex h-full items-center justify-center bg-gray-100 text-sm text-gray-500">
+            course image
+          </div>
+        </div>
+        <span class="absolute top-3 right-3 z-20 rounded-full bg-iiuc-amber
+                     px-3 py-1 text-xs font-bold text-amber-950">NEW</span>
+        <div class="p-5">
+          <h3 class="text-lg font-bold text-iiuc-navy mb-1">CSE-1221</h3>
+          <p class="text-sm text-gray-500">3 credits &middot; 2nd semester</p>
+        </div>
+      </article>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 3, Class 3 | Live build: a complete static page
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  This is everything from Weeks 1 to 3 in one page, and it is the
+  SHAPE of Mini Project 1: semantic HTML, an external stylesheet,
+  Flexbox and Grid, mobile-first responsive CSS, accessible states.
+
+  Built in five steps:
+    1. Plan the regions on paper
+    2. Write ALL the HTML first (this file), no CSS
+    3. Style top to bottom: reset, base, layout, components, states
+    4. Make it responsive
+    5. Run the pre-submission pass
+
+  HOW TO RUN
+  Open with Live Server. Press F12, then Ctrl+Shift+M for device mode.
+  Test at 360px, 768px and 1280px.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Department of Computer Science and Engineering, IIUC — course overview page.">
+  <title>Department of CSE | IIUC</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ============ HEADER + NAV (Flexbox: one row) ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="#main-content" class="brand">IIUC &middot; CSE</a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="#about" aria-current="page">About</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#faculty">Faculty</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container">
+        <h1>Computer Science &amp; Engineering</h1>
+        <p class="hero__lead">
+          A four-year programme in software, systems and applied computing at
+          International Islamic University Chittagong.
+        </p>
+        <a href="#courses" class="btn btn--accent">Explore the courses</a>
+      </div>
+    </section>
+
+    <div class="container">
+
+      <!-- ============ ABOUT ============ -->
+      <section id="about">
+        <h2>About the Department</h2>
+        <p>
+          The department offers a practical, project-based curriculum. Students
+          build and deploy real applications from the third semester onwards, and
+          every course is assessed through individual demonstration as well as
+          written work.
+        </p>
+
+        <ul class="facts">
+          <li><strong>15</strong> teaching weeks per semester</li>
+          <li><strong>6</strong> individual mini projects in CSE-2340</li>
+          <li><strong>1</strong> group showcase at the end of term</li>
+        </ul>
+      </section>
+
+      <!-- ============ COURSES (Flexbox: a wrapping row) ============ -->
+      <section id="courses">
+        <h2>Current Courses</h2>
+
+        <div class="card-row">
+          <article class="card">
+            <h3>CSE-2340</h3>
+            <p class="card__meta">Software Development 1 &middot; 2 credits</p>
+            <p>Front-end development from semantic HTML to React, Firebase and deployment.</p>
+            <a href="#about" class="btn">Course page</a>
+          </article>
+
+          <article class="card">
+            <h3>CSE-1221</h3>
+            <p class="card__meta">Computer Programming 2 &middot; 3 credits</p>
+            <p>Object-oriented programming in Java, data structures and problem solving.</p>
+            <a href="#about" class="btn">Course page</a>
+          </article>
+
+          <article class="card">
+            <h3>CSE-3532</h3>
+            <p class="card__meta">Web Programming &middot; 3 credits</p>
+            <p>Server-side programming, REST design, databases and project architecture.</p>
+            <a href="#about" class="btn">Course page</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ FACULTY (Grid: rows and columns) ============ -->
+      <section id="faculty">
+        <h2>Faculty</h2>
+
+        <div class="gallery">
+          <article class="tile">
+            <h3>Software Engineering</h3>
+            <p>Development practice, testing and project workflow.</p>
+          </article>
+          <article class="tile">
+            <h3>Machine Intelligence</h3>
+            <p>Computer vision, pattern recognition and applied learning.</p>
+          </article>
+          <article class="tile">
+            <h3>Networks &amp; Systems</h3>
+            <p>Operating systems, distributed systems and security.</p>
+          </article>
+          <article class="tile">
+            <h3>Theory</h3>
+            <p>Algorithms, complexity and discrete mathematics.</p>
+          </article>
+          <article class="tile">
+            <h3>Data &amp; Databases</h3>
+            <p>Database design, data engineering and analytics.</p>
+          </article>
+          <article class="tile">
+            <h3>Human-Computer Interaction</h3>
+            <p>Interface design, usability and accessibility.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ ROUTINE (a real data table) ============ -->
+      <section id="routine">
+        <h2>CSE-2340 Weekly Routine</h2>
+
+        <table>
+          <caption>Autumn 2026, four classes per week</caption>
+          <thead>
+            <tr>
+              <th scope="col">Class</th>
+              <th scope="col">Type</th>
+              <th scope="col">Focus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">C1</th><td>Class</td><td>New concepts and a live build</td></tr>
+            <tr><th scope="row">C2</th><td>Practice</td><td>Supervised build and debug</td></tr>
+            <tr><th scope="row">C3</th><td>Class</td><td>New concepts and a live build</td></tr>
+            <tr><th scope="row">C4</th><td>Practice</td><td>Practice or project evaluation</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ============ CONTACT ============ -->
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>
+          Department of Computer Science and Engineering,
+          International Islamic University Chittagong,
+          Kumira, Chattogram.
+        </p>
+        <p>
+          <a href="https://www.iiuc.ac.bd" class="btn">Visit the university website</a>
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Department of Computer Science and Engineering, IIUC.</p>
+      <p>Built for CSE-2340 Software Development 1.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

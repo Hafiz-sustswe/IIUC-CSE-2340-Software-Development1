@@ -1,0 +1,250 @@
+/* ============================================================
+   CSE-2340 | Week 4, Class 2 | PRACTICE STARTER STYLESHEET
+
+   ============================================================
+   THIS FILE IS BROKEN ON PURPOSE. SIX BUGS ARE PLANTED HERE.
+   ============================================================
+
+   1. The NEW badge sits in the corner of the PAGE, not the card
+   2. top and left do nothing on the "Popular" tag
+   3. The header does not stick when you scroll
+   4. Page text scrolls through the header
+   5. The caption is hidden behind the image
+   6. z-index: 9999 on the tooltip still does not put it on top
+
+   For each one ask, in this order:
+     - Is this element positioned at all?
+     - Which ancestor is it measuring from?
+     - Does an ancestor have its own z-index?
+
+   Do NOT edit index.html. The HTML is already correct.
+   ============================================================ */
+
+:root {
+  --navy:  #003366;
+  --navy2: #0A4A85;
+  --amber: #E39A18;
+  --ink:   #3D4A57;
+  --muted: #6B7A88;
+  --line:  #D6DEE6;
+  --bg:    #F7F9FB;
+  --panel: #E8EEF4;
+  --white: #FFFFFF;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--bg);
+}
+
+h1, h2 { color: var(--navy); margin-bottom: 10px; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.15rem; }
+p  { margin-bottom: 10px; }
+
+code {
+  font-family: "Courier New", monospace;
+  background-color: var(--panel);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.container { width: 92%; max-width: 1100px; margin: 0 auto; }
+
+main { padding: 28px 0; }
+
+section { margin-bottom: 36px; }
+
+.lead { color: var(--muted); }
+
+
+/* ---------- HEADER ---------- */
+
+.site-header {
+  /* BUG 3: this header does not stick when you scroll.
+     Position values other than sticky ignore the top value below.
+
+     BUG 4: even once it sticks, the page text shows through it.
+     Something here is see-through that should not be. */
+  position: relative;
+  top: 0;
+  z-index: 10;
+  background-color: rgba(0, 51, 102, 0.45);
+  color: var(--white);
+  padding: 14px 0;
+}
+
+.site-header__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.brand { font-size: 1.05rem; }
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  list-style: none;
+}
+
+.nav a { color: #BFD3E6; text-decoration: none; }
+.nav a:hover, .nav a:focus { color: var(--amber); }
+
+a:focus { outline: 3px solid var(--amber); outline-offset: 2px; }
+
+.skip-link { position: absolute; left: -999px; }
+.skip-link:focus {
+  position: static;
+  display: inline-block;
+  margin: 8px;
+  padding: 8px;
+  background-color: var(--white);
+}
+
+
+/* ---------- CARDS ---------- */
+
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  /* BUG 1: the NEW badge is measuring from the whole page instead
+     of from this card. What does a card have to be before an
+     absolutely positioned child will measure from it? */
+  overflow: hidden;
+
+  flex: 1 1 280px;
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.card__media {
+  position: relative;
+  height: 140px;
+}
+
+.card__placeholder {
+  height: 100%;
+  background-color: var(--panel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.card__caption {
+  /* BUG 5: this caption is behind the grey image block.
+     It needs to be taken out of the flow AND lifted above it.
+     That is two properties, not one. */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: var(--white);
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.card__badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  background-color: var(--amber);
+  color: #3A2700;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.card__body { padding: 20px; }
+
+.card__meta { color: var(--muted); font-size: 0.85rem; }
+
+.card__tag {
+  /* BUG 2: top and left are set but the tag does not move at all.
+     Which position value is required before offsets do anything? */
+  top: -6px;
+  left: 8px;
+
+  display: inline-block;
+  background-color: var(--panel);
+  color: var(--navy);
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+
+/* ---------- TOOLTIP AND BANNER ---------- */
+
+.panel {
+  /* BUG 6: the tooltip inside this panel has z-index: 9999 and is
+     still covered by the banner, which only has z-index: 5.
+     This rule is the reason. A child cannot climb above the level
+     of the parent that contains it. */
+  position: relative;
+  z-index: 1;
+
+  background-color: var(--panel);
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.tooltip {
+  position: relative;
+  z-index: 9999;
+  display: inline-block;
+  background-color: var(--navy);
+  color: var(--white);
+  padding: 8px 14px;
+  border-radius: 4px;
+}
+
+.banner {
+  position: relative;
+  z-index: 5;
+  background-color: var(--amber);
+  color: #3A2700;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 8px;
+  margin-top: -24px;
+  margin-left: 60px;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+.site-footer {
+  background-color: var(--panel);
+  padding: 22px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+
+/* ---------- TABLET AND UP ---------- */
+
+@media (min-width: 768px) {
+  .site-header__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

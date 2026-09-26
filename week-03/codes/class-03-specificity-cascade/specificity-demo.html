@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 3, Class 3 | Specificity and cascade demonstration
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  Open with Live Server, then open DevTools and INSPECT each example.
+  The point of this file is not what it looks like — it is what the
+  Styles panel shows you when you inspect it.
+
+  For every example below:
+    1. Right click the element and choose Inspect
+    2. Read the Styles panel from the top
+    3. Find the rules that lost — they are struck through
+    4. Ask: which rule is beating this one, and why?
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSE-2340 | Specificity and Cascade Demo</title>
+  <link rel="stylesheet" href="specificity-demo.css">
+</head>
+
+<body>
+
+  <h1>Specificity and the Cascade</h1>
+  <p>Inspect every example. Predict the winner <strong>before</strong> you look.</p>
+  <hr>
+
+  <!-- ===== 1. SOURCE ORDER ===== -->
+  <h2>1. Source order — the tie-breaker</h2>
+  <p class="q">Two rules, identical specificity. Which wins?</p>
+  <p class="order-demo">Both rules target <code>.order-demo</code>. The later one wins, so this is green.</p>
+  <hr>
+
+  <!-- ===== 2. SPECIFICITY BEATS ORDER ===== -->
+  <h2>2. Specificity beats source order</h2>
+  <p class="q">The element rule is written LAST. Does it win?</p>
+  <button class="btn">Inspect me</button>
+  <p>No. <code>.btn</code> (0-1-0) beats <code>button</code> (0-0-1), even though
+    <code>button</code> comes later in the file.</p>
+  <hr>
+
+  <!-- ===== 3. NOT A SUM ===== -->
+  <h2>3. Specificity is not a sum</h2>
+  <p class="q">Three classes versus one id. Which wins?</p>
+  <div class="page">
+    <div class="content">
+      <p id="sum-demo" class="card">Inspect me</p>
+    </div>
+  </div>
+  <p>The id wins. <code>1-0-0</code> beats <code>0-3-0</code> because the first
+    number is compared first. It is not 1 versus 3.</p>
+  <hr>
+
+  <!-- ===== 4. INLINE ===== -->
+  <h2>4. Inline styles</h2>
+  <p class="q">An inline style versus a class. Which wins?</p>
+  <p class="loud" style="color: #B3261E;">Inspect me — the inline style wins (1-0-0-0).</p>
+  <p>This is why inline styles are hard to override, and why you should not use them.</p>
+  <hr>
+
+  <!-- ===== 5. IMPORTANT ===== -->
+  <h2>5. !important</h2>
+  <p class="q">Can anything beat an inline style?</p>
+  <p class="shout" style="color: #B3261E;">Inspect me — <code>!important</code> beats even the inline style.</p>
+  <p>It works, which is exactly the problem: the next conflict now needs another
+    <code>!important</code>, and so does the one after that.</p>
+  <hr>
+
+  <!-- ===== 6. INHERITANCE ===== -->
+  <h2>6. Inheritance</h2>
+  <div class="inherit-demo">
+    <p>This paragraph inherits its colour and font from the parent div.</p>
+    <p>So does this one. Neither has a rule of its own — inspect and see
+      <em>Inherited from div.inherit-demo</em> in the Styles panel.</p>
+    <div class="inherit-box">This box does NOT inherit the parent's border or padding.
+      Box properties never inherit.</div>
+  </div>
+  <hr>
+
+  <!-- ===== 7. FORM CONTROLS ===== -->
+  <h2>7. The inheritance trap: form controls</h2>
+  <p>Body is Arial. These two inputs are not, unless told to be.</p>
+  <p><input type="text" value="No font-family: inherit"></p>
+  <p><input type="text" class="fixed-input" value="With font-family: inherit"></p>
+  <p>This is why your Week 2 form looked different from the rest of the page.</p>
+  <hr>
+
+  <!-- ===== 8. PSEUDO-CLASSES ===== -->
+  <h2>8. Pseudo-classes</h2>
+  <p>Hover over these, then <strong>Tab</strong> to them with the keyboard.
+    Both states are styled — they always should be.</p>
+  <p>
+    <a href="#top" class="link-demo">First link</a>
+    <a href="#top" class="link-demo">Second link</a>
+    <a href="#top" class="link-demo">Third link</a>
+  </p>
+
+  <h3>Position-based pseudo-classes</h3>
+  <ul class="list-demo">
+    <li>First item — styled by :first-child</li>
+    <li>Second item</li>
+    <li>Third item</li>
+    <li>Fourth item</li>
+    <li>Last item — styled by :last-child</li>
+  </ul>
+
+  <h3>:nth-child(even) — zebra striping</h3>
+  <table class="stripe-demo">
+    <caption>Every second row is shaded by one CSS rule</caption>
+    <thead>
+      <tr><th scope="col">Class</th><th scope="col">Topic</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">C1</th><td>Flexbox and Grid</td></tr>
+      <tr><th scope="row">C2</th><td>Layout practice</td></tr>
+      <tr><th scope="row">C3</th><td>Specificity and cascade</td></tr>
+      <tr><th scope="row">C4</th><td>Mini Project 1 evaluation</td></tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <!-- ===== 9. YOUR TURN ===== -->
+  <h2>9. Your turn</h2>
+  <p class="q">Predict the colour of the sentence below before inspecting it.
+    Then check whether you were right.</p>
+  <div id="wrapper" class="outer">
+    <p class="text special">What colour am I, and which rule won?</p>
+  </div>
+  <p>Four rules target this paragraph. Work out the specificity of each one,
+    then confirm it in the Styles panel.</p>
+
+</body>
+
+</html>

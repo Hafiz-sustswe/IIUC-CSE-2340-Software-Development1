@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 4, Class 4 | PRACTICE STARTER
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  ============================================================
+  SIX BUGS ARE PLANTED IN THIS FILE.
+  Every one of them is in a class attribute. There is no CSS
+  file involved at all.
+  ============================================================
+
+  The six symptoms:
+    1. The cards never become a row, however wide the window
+    2. gap and justify-between do nothing in the header
+    3. grid-cols-3 is ignored, the tiles stay in one column
+    4. The page heading is not navy, it is default black
+    5. Tab to a link: nothing visible happens
+    6. There is a horizontal scrollbar at 360px
+
+  Method: select the element in DevTools and READ ITS CLASS LIST.
+  A class that generated no CSS simply does not exist, exactly
+  like a misspelt CSS property.
+
+  The answers are in ../solution/. Do not open it until you have
+  fixed at least four yourself.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Cards | CSE-2340 Tailwind Practice</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+      --color-iiuc-amber: #E39A18;
+      /* BUG 4 lives here. The heading below asks for text-iiuc,
+         but is that token defined anywhere? */
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-700">
+
+  <!-- BUG 2: gap-5 and justify-between are set, and neither does
+       anything. What has to be true of a container before those
+       two properties mean anything at all? -->
+  <header class="sticky top-0 z-10 bg-blue-900 text-white">
+    <div class="mx-auto w-11/12 max-w-5xl py-4 justify-between items-center gap-5">
+      <strong class="text-lg">IIUC &middot; CSE Courses</strong>
+      <nav aria-label="Main navigation">
+        <ul class="flex flex-wrap gap-5">
+          <!-- BUG 5: hover is styled, keyboard users get nothing.
+               One prefix is missing from each of these links. -->
+          <li><a href="#main-content" class="text-blue-100 hover:text-amber-400">Courses</a></li>
+          <li><a href="#tiles" class="text-blue-100 hover:text-amber-400">Weeks</a></li>
+          <li><a href="#about" class="text-blue-100 hover:text-amber-400">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="mx-auto w-11/12 max-w-5xl py-8">
+
+    <!-- BUG 4: this should be navy. It is not. -->
+    <h1 class="text-3xl font-bold text-iiuc mb-4">Our Courses</h1>
+
+    <p class="mb-6">Three cards below, then a tile grid. Resize the window and
+      watch what does and does not change.</p>
+
+    <!-- BUG 1: the cards are supposed to be a column on a phone and
+         a row from 768px up. Read the prefix carefully: which width
+         is it actually targeting? -->
+    <section class="flex md:flex-col gap-5 mb-12">
+
+      <!-- BUG 6: a fixed width causes a horizontal scrollbar on a
+           360px screen. What should a card width be instead? -->
+      <article class="relative w-[420px] bg-white border border-gray-300 rounded-lg overflow-hidden">
+        <span class="absolute top-3 right-3 z-10 bg-iiuc-amber text-amber-950
+                     text-xs font-bold px-2.5 py-1 rounded-full">NEW</span>
+        <div class="h-36 bg-gray-200"></div>
+        <div class="p-5">
+          <h2 class="text-lg font-bold text-blue-900 mb-1">CSE-2340</h2>
+          <p class="text-sm text-gray-500">2 credits &middot; 3rd semester</p>
+        </div>
+      </article>
+
+      <article class="relative w-[420px] bg-white border border-gray-300 rounded-lg overflow-hidden">
+        <span class="absolute top-3 right-3 z-10 bg-iiuc-amber text-amber-950
+                     text-xs font-bold px-2.5 py-1 rounded-full">NEW</span>
+        <div class="h-36 bg-gray-200"></div>
+        <div class="p-5">
+          <h2 class="text-lg font-bold text-blue-900 mb-1">CSE-1221</h2>
+          <p class="text-sm text-gray-500">3 credits &middot; 2nd semester</p>
+        </div>
+      </article>
+
+      <article class="relative w-[420px] bg-white border border-gray-300 rounded-lg overflow-hidden">
+        <div class="h-36 bg-gray-200"></div>
+        <div class="p-5">
+          <h2 class="text-lg font-bold text-blue-900 mb-1">CSE-3532</h2>
+          <p class="text-sm text-gray-500">3 credits &middot; 5th semester</p>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- BUG 3: grid-cols-3 is present and does nothing.
+         Same family of problem as bug 2. -->
+    <section id="tiles" class="mb-12">
+      <h2 class="text-2xl font-bold text-blue-900 mb-4">Weeks</h2>
+
+      <div class="grid-cols-3 gap-4">
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 1</article>
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 2</article>
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 3</article>
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 4</article>
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 5</article>
+        <article class="bg-white border border-gray-300 rounded-lg p-4">Week 6</article>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="text-2xl font-bold text-blue-900 mb-4">About</h2>
+      <p class="mb-3">Scroll this section to check the sticky header.</p>
+      <p class="mb-3">The department runs a practical, project-based curriculum.</p>
+      <p class="mb-3">Students build and deploy real applications.</p>
+      <p class="mb-3">Every course is assessed by individual demonstration.</p>
+      <p class="mb-3">Mini projects are evaluated in dedicated classes.</p>
+      <p>Teams for the final project are formed in Week 8.</p>
+    </section>
+
+  </main>
+
+  <footer class="bg-gray-100 text-gray-500 text-sm">
+    <div class="mx-auto w-11/12 max-w-5xl py-6 text-center">
+      <p>&copy; 2026 Department of Computer Science and Engineering, IIUC.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

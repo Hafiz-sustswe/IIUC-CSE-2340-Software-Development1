@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 4, Class 1 | CSS positioning demonstration
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  Open with Live Server and SCROLL. Several examples only make sense
+  while the page is moving.
+
+  For each example: inspect the element, look at the computed
+  position value, and ask which ancestor it is measuring from.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSE-2340 | Positioning Demo</title>
+  <link rel="stylesheet" href="positioning-demo.css">
+</head>
+
+<body>
+
+  <!-- Sticky: stays at the top once you scroll past it -->
+  <header class="demo-header">
+    <strong>Positioning Demo</strong>
+    <span class="demo-header__note">position: sticky &middot; top: 0 &middot; scroll me</span>
+  </header>
+
+  <main>
+
+    <h1>CSS Positioning</h1>
+    <p>Five values, one element at a time. Inspect each box as you go.</p>
+    <hr>
+
+    <h2>1. static &mdash; the default</h2>
+    <div class="stage">
+      <div class="box box--static">
+        position: static<br>
+        <small>top: 40px is set but ignored</small>
+      </div>
+    </div>
+    <p>A static element ignores <code>top</code>, <code>right</code>,
+      <code>bottom</code>, <code>left</code> and <code>z-index</code> completely.
+      This is why your first attempt at nudging something usually does nothing.</p>
+    <hr>
+
+    <h2>2. relative &mdash; nudged, but its space is kept</h2>
+    <div class="stage">
+      <div class="box">before</div>
+      <div class="box box--relative">
+        position: relative<br>
+        <small>top: 20px &middot; left: 30px</small>
+      </div>
+      <div class="box">after</div>
+    </div>
+    <p>The box moved, but the gap where it used to be is still there. Nothing
+      else on the page shifted. That is the difference between relative and
+      absolute.</p>
+    <hr>
+
+    <h2>3. absolute &mdash; removed from the flow</h2>
+
+    <h3>With a positioned parent (correct)</h3>
+    <div class="stage stage--positioned">
+      <span class="tag">stage has position: relative</span>
+      <div class="box box--absolute">
+        position: absolute<br>
+        <small>top: 12px &middot; right: 12px</small>
+      </div>
+    </div>
+
+    <h3>With NO positioned parent (the classic bug)</h3>
+    <div class="stage">
+      <span class="tag">stage has position: static</span>
+      <div class="box box--absolute-broken">
+        absolute, no positioned parent<br>
+        <small>it measures from the page</small>
+      </div>
+    </div>
+    <p>Scroll to the very top of this page to find the second box. It jumped to
+      the document corner because no ancestor was positioned.</p>
+    <hr>
+
+    <h2>4. fixed &mdash; pinned to the viewport</h2>
+    <p>The dark circle at the bottom right of your screen is
+      <code>position: fixed</code>. Scroll: it does not move. It was removed from
+      the flow, so no space is reserved for it anywhere.</p>
+    <hr>
+
+    <h2>5. sticky &mdash; normal until it hits a threshold</h2>
+    <p>The page header above is sticky. So is each of the labels below. Scroll
+      slowly and watch each label stick, then get pushed away by the next one.</p>
+
+    <section class="sticky-demo">
+      <h3 class="sticky-label">Section A</h3>
+      <p>Content for section A.</p>
+      <p>More content so that there is something to scroll.</p>
+      <p>Still section A.</p>
+
+      <h3 class="sticky-label">Section B</h3>
+      <p>Content for section B.</p>
+      <p>More content.</p>
+      <p>Still section B.</p>
+
+      <h3 class="sticky-label">Section C</h3>
+      <p>Content for section C.</p>
+      <p>More content.</p>
+      <p>Still section C.</p>
+    </section>
+    <p>A sticky element stops at the end of its parent. That is the main
+      difference from fixed.</p>
+    <hr>
+
+    <h2>6. The pattern you will actually use</h2>
+    <div class="card-row">
+
+      <article class="card">
+        <div class="card__media">
+          <div class="card__placeholder">image</div>
+          <p class="card__caption">Caption sitting over the image</p>
+        </div>
+        <span class="card__badge">NEW</span>
+        <div class="card__body">
+          <h3>Card with a badge</h3>
+          <p>The card is <code>relative</code>. The badge and the caption are
+            <code>absolute</code>, so they measure from the card.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__media">
+          <div class="card__placeholder">image</div>
+        </div>
+        <span class="card__badge card__badge--sale">SALE</span>
+        <div class="card__body">
+          <h3>Same pattern again</h3>
+          <p>Reusable because the positioning context travels with the card,
+            not with the page.</p>
+        </div>
+      </article>
+
+    </div>
+    <hr>
+
+    <h2>7. z-index and stacking</h2>
+    <div class="stage stage--positioned stack-demo">
+      <div class="stack stack--a">z-index: 1</div>
+      <div class="stack stack--b">z-index: 3</div>
+      <div class="stack stack--c">z-index: 2</div>
+    </div>
+    <p>Inspect each one. Now try this in DevTools: remove
+      <code>position: absolute</code> from the middle box. Its
+      <code>z-index</code> stops working immediately, because z-index needs a
+      positioned element.</p>
+
+    <h3>The trap: a trapped child</h3>
+    <div class="trap-parent">
+      parent has z-index: 1
+      <div class="trap-child">child has z-index: 9999 and still loses</div>
+    </div>
+    <div class="trap-sibling">sibling has z-index: 2 and wins</div>
+    <p>A child can never rise above its parent's level. This is why
+      <code>9999</code> sometimes does nothing at all.</p>
+
+  </main>
+
+  <a href="#top" class="back-to-top" aria-label="Back to top">&uarr;</a>
+
+</body>
+
+</html>

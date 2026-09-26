@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+  CSE-2340 | Week 4, Class 2 | PRACTICE SOLUTION
+  Md Sadman Hafiz, Lecturer, Dept. of CSE, IIUC
+
+  ============================================================
+  SOLUTION. All six bugs are fixed in styles.css.
+  The HTML is identical to the starter, not one line changed.
+  ============================================================
+
+  Open styles.css beside the starter version in VS Code
+  (select both, right click, Compare Selected) to see exactly
+  which declarations changed. Each fix is marked FIX n.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Cards | CSE-2340 Solution</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <strong class="brand">IIUC &middot; CSE Courses</strong>
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="#main-content" aria-current="page">Courses</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+
+    <h1>Our Courses</h1>
+    <p class="lead">Scroll down. The header should stay at the top of the screen
+      and stay readable while the content moves behind it.</p>
+
+    <section class="card-row">
+
+      <article class="card">
+        <div class="card__media">
+          <div class="card__placeholder">course image</div>
+          <p class="card__caption">Software Development 1</p>
+        </div>
+        <span class="card__badge">NEW</span>
+        <div class="card__body">
+          <h2>CSE-2340</h2>
+          <p class="card__meta">2 credits &middot; 3rd semester</p>
+          <p>Front-end development from semantic HTML to React and deployment.</p>
+          <span class="card__tag">Popular</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__media">
+          <div class="card__placeholder">course image</div>
+          <p class="card__caption">Computer Programming 2</p>
+        </div>
+        <span class="card__badge">NEW</span>
+        <div class="card__body">
+          <h2>CSE-1221</h2>
+          <p class="card__meta">3 credits &middot; 2nd semester</p>
+          <p>Object-oriented programming in Java, data structures, problem solving.</p>
+          <span class="card__tag">Popular</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__media">
+          <div class="card__placeholder">course image</div>
+          <p class="card__caption">Web Programming</p>
+        </div>
+        <span class="card__badge">NEW</span>
+        <div class="card__body">
+          <h2>CSE-3532</h2>
+          <p class="card__meta">3 credits &middot; 5th semester</p>
+          <p>Server-side programming, REST design, databases and architecture.</p>
+          <span class="card__tag">Popular</span>
+        </div>
+      </article>
+
+    </section>
+
+    <section id="about">
+      <h2>About the Department</h2>
+      <p>Scroll through this section to test the sticky header properly.</p>
+      <p>The department runs a practical, project-based curriculum.</p>
+      <p>Students build and deploy real applications from the third semester.</p>
+      <p>Every course is assessed by individual demonstration as well as written work.</p>
+      <p>Mini projects are evaluated in dedicated classes.</p>
+      <p>The final group project integrates React, routing and Firebase.</p>
+      <p>Teams are formed in Week 8.</p>
+      <p>Each member owns at least one feature end to end.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Tooltip test</h2>
+      <p>The tooltip below has <code>z-index: 9999</code> and is still covered by
+        the banner. Work out why before you change anything.</p>
+      <span class="tooltip">I should be on top</span>
+    </section>
+
+    <div class="banner">Overlapping banner (z-index: 5)</div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Department of Computer Science and Engineering, IIUC.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
