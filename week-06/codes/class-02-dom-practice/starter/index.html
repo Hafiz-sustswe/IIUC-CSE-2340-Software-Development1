@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library — Week 6 C2 (broken)</title>
+
+  <!--
+    BROKEN ON PURPOSE. There are six bugs in script.js.
+
+    Only TWO of them produce a Console error.
+    The other four are silent: the page simply looks wrong.
+
+    Your new tool this week is the ELEMENTS tab, not the Console.
+      Element missing entirely?   → it was never appended
+      Element there but wrong?    → check its classes and its content
+
+    Fix ONE bug at a time and reload between each.
+  -->
+
+  <style>
+    :root {
+      --navy: #003366;
+      --line: #d6dee6;
+      --panel: #f2f5f8;
+      --amber: #e39a18;
+      --amber-soft: #fdf3e1;
+      --ink: #1a2733;
+      --muted: #6b7a88;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0; padding: 2rem 1rem;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink); line-height: 1.5;
+    }
+
+    main { max-width: 720px; margin: 0 auto; }
+
+    h1 { color: var(--navy); font-size: 1.6rem; margin: 0 0 0.25rem; }
+    .sub { color: var(--muted); margin: 0 0 1.5rem; font-size: 0.9rem; }
+
+    #library {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+    }
+
+    /* A book only looks like a card once .book is on it. */
+    .book {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      padding: 0.9rem 1rem;
+    }
+
+    .book h3 { margin: 0 0 0.25rem; font-size: 1rem; color: var(--navy); }
+    .book p  { margin: 0; font-size: 0.85rem; color: var(--muted); }
+
+    /* Books published before 2019 get this. */
+    .old {
+      background: var(--amber-soft);
+      border-color: var(--amber);
+    }
+
+    #count { margin-top: 1.5rem; font-weight: bold; color: var(--navy); }
+
+    .note {
+      margin-top: 2rem; padding: 0.75rem 1rem;
+      background: var(--panel); border-left: 4px solid var(--navy);
+      font-size: 0.85rem; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <h1>Library</h1>
+    <p class="sub">Week 6 Class 2 &middot; debug drill</p>
+
+    <div id="library"></div>
+
+    <p id="book-count">Loading...</p>
+
+    <p class="note">
+      What you SHOULD see: three cards, two of them amber, and a count
+      reading "3 books, 2 published before 2019".
+    </p>
+  </main>
+
+  <script src="script.js" defer></script>
+
+</body>
+</html>

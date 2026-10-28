@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Board — Week 6 C1</title>
+
+  <!--
+    WEEK 6 CLASS 1 — The DOM
+    ------------------------------------------------
+    Look at how little HTML there is. One heading, one empty
+    container, one summary line.
+
+    Every card you will see on this page is built by board.js.
+    That is the point of today.
+
+    Open with Live Server, press F12, and keep BOTH the Console
+    and the Elements tab within reach.
+  -->
+
+  <style>
+    :root {
+      --navy: #003366;
+      --line: #d6dee6;
+      --panel: #f2f5f8;
+      --green: #1f7a55;
+      --green-soft: #e7f4ee;
+      --ink: #1a2733;
+      --muted: #6b7a88;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    main { max-width: 720px; margin: 0 auto; }
+
+    h1 { color: var(--navy); font-size: 1.6rem; margin: 0 0 0.25rem; }
+    .sub { color: var(--muted); margin: 0 0 1.5rem; font-size: 0.9rem; }
+
+    #board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    /* Your JavaScript adds .card to every card it creates. */
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      padding: 0.9rem 1rem;
+      position: relative;
+    }
+
+    .card h2 { margin: 0 0 0.2rem; font-size: 1.05rem; color: var(--navy); }
+    .card p  { margin: 0; font-size: 0.88rem; color: var(--muted); }
+
+    /* Your JavaScript adds .top only to students scoring 80 or more. */
+    .top {
+      background: var(--green-soft);
+      border-color: var(--green);
+    }
+
+    .top::after {
+      content: "TOP";
+      position: absolute;
+      top: 0.9rem;
+      right: 1rem;
+      background: var(--green);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: bold;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+    }
+
+    #summary {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      color: var(--navy);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <h1>Class Board</h1>
+    <p class="sub">CSE-2340 Software Development 1 &middot; Autumn 2026</p>
+
+    <!--
+      EMPTY ON PURPOSE.
+      Note the id: board. Your selector must match it exactly,
+      including the # in querySelector("#board").
+    -->
+    <div id="board"></div>
+
+    <p id="summary">Loading...</p>
+  </main>
+
+  <script src="board.js" defer></script>
+
+</body>
+</html>
